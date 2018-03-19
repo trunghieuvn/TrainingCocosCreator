@@ -1,2 +1,2 @@
-# TrainingCocosCreator
-Game Mobile cross platform  TrainingCocosCreator
+# hello-world
+Hello world new project template.
