@@ -72,6 +72,7 @@ export default class GameManager extends cc.Component {
             if(Math.floor(this.totalTime) > 5 ) {
                 this.cocos.node.runAction(cc.rotateTo(3, 180));
                 this.state = GameState.EndGame;
+                this.GUI.active = true;
             }
             this.label.string = Math.floor(this.totalTime).toString();
             
