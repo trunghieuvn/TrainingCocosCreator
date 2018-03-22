@@ -10,34 +10,35 @@
 
 const {ccclass, property} = cc._decorator;
 
-import NodeController from "./NodeController";
-import DotController from "./DotController";
+import GameController from "./GameController";
+import GameSettings from "./GameSettings";
 
 enum GameState {
-    Start,
-    InGame,
-    EndGame
+    Start = 0,
+    InGame = 1,
+    EndGame = 2
 }
 
 @ccclass
 export default class GameManager extends cc.Component {
 
     // Inspector
-    @property Speed : number = 0;
-    @property PosBegin : cc.Vec2 = new cc.Vec2();
-
     @property(cc.Label) label : cc.Label = null;
     @property(cc.Canvas) canvas : cc.Canvas = null;
     @property(cc.Node) MainMenu : cc.Node = null;
     @property(cc.Node) GameOver : cc.Node = null;
     @property(cc.Sprite) cocos : cc.Sprite = null;
 
-    @property(cc.Node) BoardGame : cc.Node = null;
-    @property(cc.Prefab) nodePrefab : cc.Prefab = null;
+    @property(cc.Node) gameManager : cc.Node = null;
 
+    @property([cc.Color]) public myColors: cc.Color[] = [];
+    // @property get width () {
+    //         return 3;
+    //     }
+        
     // private
     totalTime : number;
-    state : GameState;
+    state : GameState = GameState.Start;
 
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
@@ -45,25 +46,7 @@ export default class GameManager extends cc.Component {
         this.canvas.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart.bind(this));
         this.canvas.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd.bind(this));
     }
-    createNode(posStart) {
-        var obj = cc.instantiate(this.nodePrefab);
-        obj.setPosition(this.PosBegin);
-        obj.getComponent(NodeController).dot.getComponent(DotController).callback = this.callbackCollision.bind(this);
-        this.BoardGame.addChild(obj);
-    }
-
-    callbackCollision() {
-        cc.log("GameManager callbackCollision");
-        this.EndGame();
-    }
-    loadLevel(level, numberDot) {
-        for(var i = 0; i < level; i++) {
-            var obj = cc.instantiate(this.nodePrefab);
-            obj.rotation =  i * ( 360 / level);
-            this.BoardGame.addChild(obj);
-        }
-
-    }
+    
     playGame() {
         this.state = GameState.InGame;
         this.MainMenu.active = false;
@@ -85,7 +68,7 @@ export default class GameManager extends cc.Component {
         cc.log("HieuLog onTouchEnd");
         this.playGame();
 
-        this.createNode(this.PosBegin);
+        this.gameManager.getComponent(GameController).createNode();
     }
     // End TouchEvent
 

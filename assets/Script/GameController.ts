@@ -10,16 +10,47 @@
 
 const {ccclass, property} = cc._decorator;
 
+import NodeController from "./NodeController";
+import DotController from "./DotController";
+
 @ccclass
 export default class GameController extends cc.Component {
 
-    // LIFE-CYCLE CALLBACKS:
+     // Inspector
+     @property Speed : number = 0;
+     @property PosBegin : cc.Vec2 = new cc.Vec2();
 
-    // onLoad () {},
+    @property(cc.Prefab) nodePrefab : cc.Prefab = null;
+    @property(cc.Node) BoardGame : cc.Node = null;
+     
+    // LIFE-CYCLE CALLBACKS:
+    onLoad () {}
 
     start () {
 
     }
 
-    // update (dt) {},
+    update (dt) {}
+
+    public createNode() {
+        var obj = cc.instantiate(this.nodePrefab);
+        obj.setPosition(this.PosBegin);
+        this.BoardGame.addChild(obj);
+        
+        obj.getComponent(NodeController).dot.getComponent(DotController).callback = this.callbackCollision.bind(this);
+    }
+
+    callbackCollision() {
+        cc.log("GameController callbackCollision");
+        this.BoardGame.active = false;
+    }
+
+    loadLevel(level, numberDot) {
+        for(var i = 0; i < level; i++) {
+            var obj = cc.instantiate(this.nodePrefab);
+            obj.rotation =  i * ( 360 / level);
+            this.BoardGame.addChild(obj);
+        }
+
+    }
 }
