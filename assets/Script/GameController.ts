@@ -13,43 +13,68 @@ const {ccclass, property} = cc._decorator;
 import NodeController from './NodeController';
 import DotController from "./DotController";
 import GameSettings from "./GameSettings";
+// import SpawnNode
 
 @ccclass
 export default class GameController extends cc.Component {
 
     @property(cc.Prefab) nodePrefab : cc.Prefab = null;
-    @property(cc.Node) BoardGame : cc.Node = null;
+    @property(cc.Node) SpawNodeController : cc.Node = null;
     
     @property (GameSettings) gameSetting : GameSettings = null;
 
     callBackEndGame : () => void = null;
+
+    listNode : Array<cc.Node> = new Array<cc.Node>();
+    created : boolean = true;
     // LIFE-CYCLE CALLBACKS:
-    onLoad () {}
-
-    start () {
-
+    onLoad () {
+        cc.log("HieuLog GameController onLoad");
     }
 
-    update (dt) {}
+    start () {
+        cc.log("HieuLog GameController start");
+    }
 
-    public createNode() {
+    update (dt) {
+        if(this.created == false)
+             return;
+        this.listNode.forEach(element => {
+            element.getComponent(NodeController).OnUpdate(dt);
+        });
+    }
+
+    public async createNode() {
+        cc.log("GameController createNode"); 
+
         var obj = cc.instantiate(this.nodePrefab);
         obj.setPosition(this.gameSetting.PosBegin);
-        this.BoardGame.addChild(obj);
+        this.SpawNodeController.addChild(obj);
 
         var node = obj.getComponent(NodeController);
         node.SpeedMove = this.gameSetting.SpeedMove;
         node.SpeedRotate = this.gameSetting.SpeedRotate;
 
-        node.dot.getComponent(DotController).callback = this.callbackCollision.bind(this);
+        var dot = node.dot.getComponent(DotController);
+        dot.callback = this.callbackCollision.bind(this);
+
+        this.listNode.push(obj);
+        cc.log("size: " + this.listNode.length);
+        this.created = true;
     }
 
     callbackCollision() {
         cc.log("GameController callbackCollision");
-        this.BoardGame.active = false;
+
         if(this.callBackEndGame != null) {
             this.callBackEndGame();
         }
+        cc.log("size: " + this.listNode.length);
+        this.listNode.forEach(element => {
+            element.getComponent(NodeController).EndGame();
+        });
+
+      
     }
 
     loadLevel(level, numberDot) {
@@ -57,7 +82,7 @@ export default class GameController extends cc.Component {
             var obj = cc.instantiate(this.nodePrefab);
             obj.rotation =  i * ( 360 / level);
             obj.setPosition(0, 0);
-            this.BoardGame.addChild(obj);
+            this.SpawNodeController.addChild(obj);
 
             var node = obj.getComponent(NodeController)
             node.SpeedMove = this.gameSetting.SpeedMove;

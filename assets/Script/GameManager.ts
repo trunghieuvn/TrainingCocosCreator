@@ -39,24 +39,24 @@ export default class GameManager extends cc.Component {
     totalTime : number;
     state : GameState = GameState.Start;
 
+    gController : GameController = null;
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
-        cc.log("HieuLog onLoad");
+        cc.log("HieuLog GameManager onLoad");
         this.canvas.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart.bind(this));
         this.canvas.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd.bind(this));
     }
     start () {
-        cc.log("HieuLog start");
+        cc.log("HieuLog GameManager start");
         this.totalTime = 0;
         this.state = GameState.Start;
 
         // this.gameController.getComponent(GameController).loadLevel(5, 10);
-        var gController = this.gameController.getComponent(GameController);
-        gController.callBackEndGame = this.EndGame.bind(this);
+        this.gController = this.gameController.getComponent(GameController);
+        this.gController.callBackEndGame = this.EndGame.bind(this);
     }
 
     update (dt) {
-
         switch(this.state) {
             case GameState.Start:
             break;
@@ -76,24 +76,27 @@ export default class GameManager extends cc.Component {
         this.MainMenu.active = false;
         this.totalTime = 0;
 
-        var gController = this.gameController.getComponent(GameController);
-        gController.BoardGame.active = true;
+        this.gController.SpawNodeController.active = true;
         this.updateUI();
     }
 
     EndGame () {
         cc.log("End Game");
+        cc.log("------------------------------------------");
         this.state = GameState.EndGame;
-        this.GameOver.active = true;
+        // this.GameOver.active = true ;
     }
     // TouchEvent
     onTouchStart(event) {
     }
     onTouchEnd(event) {
         cc.log("HieuLog onTouchEnd");
-        this.playGame();
 
-        this.gameController.getComponent(GameController).createNode();
+        if(this.state == GameState.InGame && this.gController.created == true) {
+            // this.playGame();
+            this.gController.created = false;    
+            this.gController.createNode();
+        }
     }
     // End TouchEvent
 

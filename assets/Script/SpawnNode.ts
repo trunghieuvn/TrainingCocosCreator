@@ -11,24 +11,9 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class DotController extends cc.Component {
+export default class SpawnNode extends cc.Component {
 
-    public callback : () => void = null;
-
-    // LIFE-CYCLE CALLBACKS:
-    onLoad () {
-        cc.director.getCollisionManager().enabled = true;
-        // cc.director.getCollisionManager().enabledDebugDraw = true;
-    }
-
-    start () {
-
-    }
     
-    onCollisionEnter(other, self) {
-        cc.log("DotController onCollisionEnter");
-        if(this.callback != null) {
-            this.callback();
-        }
-    }
+
+    // update (dt) {},
 }

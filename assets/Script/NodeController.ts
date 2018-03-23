@@ -27,20 +27,24 @@ export default class NodeController extends cc.Component {
 
     SpeedRotate : number = 1.3;
     SpeedMove : number = 0.15;
-    public state : NodeState = NodeState.Init;
+    state : NodeState = NodeState.Init;
     
-    callBackNodeController : () => void;
+    // callBackNodeController : () => void;
     
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
         this.state = NodeState.Init;
     }
-    public MoveTo() {
-        cc.log("pos y:" + Math.abs((this.dot.getPositionY())));
+    MoveTo() {
+        // this.node.runAction( cc.moveTo(Math.abs((this.dot.getPositionY())) / this.SpeedMove, cc.Vec2.ZERO));
         this.node.runAction(cc.sequence(
             cc.moveTo(Math.abs((this.dot.getPositionY())) / this.SpeedMove, cc.Vec2.ZERO),
             cc.callFunc(this.StateMoveDone.bind(this))
         ));
+    }
+
+    EndGame() {
+        this.state = NodeState.Done;
     }
    
     StateMoveDone() {
@@ -51,9 +55,9 @@ export default class NodeController extends cc.Component {
         this.MoveTo();
     }
 
-    update (dt) {
-        if(NodeState.Rotate == this.state) {
-            var rotate = this.node.rotation + this.SpeedRotate;
+    OnUpdate (dt) {
+        if(this.state == NodeState.Rotate) {
+            var rotate = this.node.rotation + this.SpeedRotate * dt;
             this.node.rotation = rotate;
         }
     }
