@@ -29,17 +29,21 @@ export default class NodeController extends cc.Component {
     SpeedMove : number = 0.15;
     public state : NodeState = NodeState.Init;
     
+    callBackNodeController : () => void;
+    
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
         this.state = NodeState.Init;
     }
     public MoveTo() {
+        cc.log("pos y:" + Math.abs((this.dot.getPositionY())));
         this.node.runAction(cc.sequence(
-            cc.moveTo(this.SpeedMove, new cc.Vec2(0, 0)),
-            cc.callFunc(this.MoveDone.bind(this))
+            cc.moveTo(Math.abs((this.dot.getPositionY())) / this.SpeedMove, cc.Vec2.ZERO),
+            cc.callFunc(this.StateMoveDone.bind(this))
         ));
     }
-    MoveDone() {
+   
+    StateMoveDone() {
         this.line.active = true;
         this.state = NodeState.Rotate;
     }

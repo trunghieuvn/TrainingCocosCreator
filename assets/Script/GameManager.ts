@@ -27,11 +27,10 @@ export default class GameManager extends cc.Component {
     @property(cc.Canvas) canvas : cc.Canvas = null;
     @property(cc.Node) MainMenu : cc.Node = null;
     @property(cc.Node) GameOver : cc.Node = null;
-    @property(cc.Sprite) cocos : cc.Sprite = null;
 
-    @property(cc.Node) gameManager : cc.Node = null;
+    @property(cc.Node) gameController : cc.Node = null;
 
-    @property([cc.Color]) public myColors: cc.Color[] = [];
+    // @property([cc.Color]) public myColors: cc.Color[] = [];
     // @property get width () {
     //         return 3;
     //     }
@@ -46,39 +45,18 @@ export default class GameManager extends cc.Component {
         this.canvas.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart.bind(this));
         this.canvas.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd.bind(this));
     }
-    
-    playGame() {
-        this.state = GameState.InGame;
-        this.MainMenu.active = false;
-        this.totalTime = 0;
-        
-        this.cocos.node.rotation = 0;
-        this.updateUI();
-    }
-    EndGame () {
-        this.cocos.node.runAction(cc.rotateTo(3, 180));
-        this.state = GameState.EndGame;
-        this.GameOver.active = true;
-    }
-    // TouchEvent
-    onTouchStart(event) {
-        // cc.log("onTouchStart " + event);
-    }
-    onTouchEnd(event) {
-        cc.log("HieuLog onTouchEnd");
-        this.playGame();
-
-        this.gameManager.getComponent(GameController).createNode();
-    }
-    // End TouchEvent
-
     start () {
         cc.log("HieuLog start");
         this.totalTime = 0;
         this.state = GameState.Start;
+
+        // this.gameController.getComponent(GameController).loadLevel(5, 10);
+        var gController = this.gameController.getComponent(GameController);
+        gController.callBackEndGame = this.EndGame.bind(this);
     }
 
     update (dt) {
+
         switch(this.state) {
             case GameState.Start:
             break;
@@ -91,9 +69,35 @@ export default class GameManager extends cc.Component {
             default:
             break;
         }
-       
-        
     }
+
+    playGame() {
+        this.state = GameState.InGame;
+        this.MainMenu.active = false;
+        this.totalTime = 0;
+
+        var gController = this.gameController.getComponent(GameController);
+        gController.BoardGame.active = true;
+        this.updateUI();
+    }
+
+    EndGame () {
+        cc.log("End Game");
+        this.state = GameState.EndGame;
+        this.GameOver.active = true;
+    }
+    // TouchEvent
+    onTouchStart(event) {
+    }
+    onTouchEnd(event) {
+        cc.log("HieuLog onTouchEnd");
+        this.playGame();
+
+        this.gameController.getComponent(GameController).createNode();
+    }
+    // End TouchEvent
+
+    
     updateUI() {
         
     }

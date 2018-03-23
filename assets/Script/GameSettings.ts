@@ -14,9 +14,12 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class GameSettings extends cc.Component {
 
-    @property(cc.Label)
-    label: cc.Label = null;
+    // Inspector
+    @property SpeedMove : number = 1.3;
+    @property SpeedRotate : number = 0.12;
 
-    @property
-    text: string = 'hello';
+    @property PosBegin : cc.Vec2 = new cc.Vec2(0, -120);
+
+    // Game level
+    
 }
