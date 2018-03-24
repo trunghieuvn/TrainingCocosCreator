@@ -70,11 +70,10 @@ export default class GameController extends cc.Component {
             this.callBackEndGame();
         }
         cc.log("size: " + this.listNode.length);
-        this.listNode.forEach(element => {
-            element.getComponent(NodeController).EndGame();
-        });
-
-      
+        var length = this.listNode.length;
+        for(var i = 0; i < length; i ++)  {
+            this.listNode[i].getComponent(NodeController).EndGame();
+        }
     }
 
     loadLevel(level, numberDot) {
@@ -90,5 +89,13 @@ export default class GameController extends cc.Component {
             node.StateMoveDone(); 
         }
 
+    }
+
+    Reset() {
+        var length = this.listNode.length;
+        for(var i = 0; i < length; i ++)  {
+            this.listNode.pop();
+        }
+        this.SpawNodeController.removeAllChildren();
     }
 }

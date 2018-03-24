@@ -84,8 +84,9 @@ export default class GameManager extends cc.Component {
         cc.log("End Game");
         cc.log("------------------------------------------");
         this.state = GameState.EndGame;
-        // this.GameOver.active = true ;
+        this.GameOver.active = true ;
     }
+    
     // TouchEvent
     onTouchStart(event) {
     }
@@ -113,7 +114,7 @@ export default class GameManager extends cc.Component {
 
     btnClose() {
         this.GameOver.active = false;
-        this.state = GameState.Start;
+        this.Reset();
     }
 
     btnGoToMenu() {
@@ -123,6 +124,12 @@ export default class GameManager extends cc.Component {
 
     btnRetry() {
         this.btnClose();
+    }
+
+    Reset () {
+        this.state = GameState.Start;
+        this.gController.Reset();
         this.playGame();
+        
     }
 }
