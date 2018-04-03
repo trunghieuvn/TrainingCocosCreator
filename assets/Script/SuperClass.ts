@@ -12,7 +12,7 @@ export default class SuperClass extends cc.Component {
 
     async onLoad() {
         // init logic
-        this.label.string = await this.testAsync();
+        // this.label.string = await this.testAsync();
     }
 
     protected async testAsync(): Promise<string> {
