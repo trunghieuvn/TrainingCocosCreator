@@ -1,94 +1,94 @@
 // Learn TypeScript:
-//  - [Chinese] http://www.cocos.com/docs/creator/scripting/typescript.html
-//  - [English] http://www.cocos2d-x.org/docs/editors_and_tools/creator-chapters/scripting/typescript/index.html
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/typescript.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/typescript.html
 // Learn Attribute:
-//  - [Chinese] http://www.cocos.com/docs/creator/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/editors_and_tools/creator-chapters/scripting/reference/attributes/index.html
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/reference/attributes.html
 // Learn life-cycle callbacks:
-//  - [Chinese] http://www.cocos.com/docs/creator/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/editors_and_tools/creator-chapters/scripting/life-cycle-callbacks/index.html
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
 const {ccclass, property} = cc._decorator;
 
-enum  GameState {
-    Start,
-    InGame,
-    EndGame
-}
+import Ball from './Ball';
 
+enum GameState {
+    Started,
+    InGame,
+    GameOver
+}
 
 @ccclass
 export default class GameManager extends cc.Component {
 
-    // Inspector
     @property(cc.Label) label: cc.Label = null;
     @property(cc.Canvas) canvas : cc.Canvas = null;
-    @property(cc.Node) GUI : cc.Node = null;
-    @property(cc.Sprite) cocos : cc.Sprite = null;
 
-    // private
+    @property(cc.Prefab) prefab_CaiTrung : cc.Prefab = null;
+
+    @property(cc.Node) player : cc.Node = null;
+    @property({}) speed : number = 0;
     totalTime : number;
-    state : GameState;
+    gameState : GameState;
 
     // LIFE-CYCLE CALLBACKS:
+
     onLoad () {
-        cc.log("HieuLog onLoad");
-        this.canvas.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart.bind(this));
-        this.canvas.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd.bind(this));
+        this.canvas.node.on(cc.Node.EventType.TOUCH_START,
+             this.onTouchStart.bind(this));
+        this.canvas.node.on(cc.Node.EventType.TOUCH_END, 
+            this.onTouchEnd.bind(this));
+            this.canvas.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove.bind(this));
     }
-    playGame() {
-        this.state = GameState.InGame;
-        this.GUI.active = false;
+
+    onTouchStart (event) {
+        cc.log("GameManager onTouchStart");
+    }
+    onTouchEnd (event) {
+        cc.log("GameManager onTouchEnd");
+        this.gameState = GameState.InGame;
         this.totalTime = 0;
-        
-        this.cocos.node.stopAllActions();
-        this.cocos.node.rotation = 0;
     }
-    // TouchEvent
-    onTouchStart(event) {
-        cc.log("onTouchStart " + event);
+    onTouchMove (event) {
+        cc.log("GameManager onTouchMove");
     }
-    onTouchEnd(event) {
-        cc.log("HieuLog onTouchEnd");
-        this.playGame();
-
-    }
-    // End TouchEvent
-
     start () {
-        cc.log("HieuLog start");
         this.totalTime = 0;
-        this.state = GameState.Start;
+        this.gameState = GameState.Started;
+
+        for(var i = 0; i < 5; i ++ ){
+           var obj =  cc.instantiate(this.prefab_CaiTrung);
+           this.node.addChild(obj);
+
+           
+           var ball = obj.getComponent(Ball);
+           ball.MoveObj();
+           ball.setSpeed(i * 100);
+           obj.x = i * 30;
+           obj.y = i * 30;
+        }
     }
 
     update (dt) {
-        switch(this.state){
-            case GameState.Start:
-
-            break;
-            case GameState.InGame:
-            this.totalTime += dt;
-
-            if(Math.floor(this.totalTime) > 5 ) {
-                this.cocos.node.runAction(cc.rotateTo(3, 180));
-                this.state = GameState.EndGame;
-                this.GUI.active = true;
+        switch(this.gameState) {
+            case GameState.Started:
+            {
+                break;
             }
-            this.label.string = Math.floor(this.totalTime).toString();
-            
-            break;
-            case GameState.EndGame:
+            case GameState.InGame:
+            {
+                this.totalTime += dt;
 
-            break;
+               
+                break;
+            }
+            case GameState.GameOver:
+            {
+                break;
+            }
         }
-       
         
-    }
-    
-    btnPlay() {
-        this.playGame();
-    }
-    btnExit() {
-        cc.game.end();
+        this.label.string = Math.floor(this.totalTime).toString();
+
     }
 }
