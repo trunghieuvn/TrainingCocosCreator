@@ -17,7 +17,7 @@ echo 	  Working ON: %CUR_PATH%
 echo.
 
 echo 	0. Clean
-echo 	1. Build Data
+echo 	1. Remove folder auto genarate
 echo 	5. Build Full (SO + Apk)
 
 echo 	99. Exit
@@ -26,7 +26,7 @@ echo.
 set /p opt=		Enter choose: 
 
 if "%opt%"=="0" goto Clean
-if "%opt%"=="1" goto Build_Data
+if "%opt%"=="1" goto RemoveFolder
 
 
 REM-------------------------Function--------------------------
@@ -38,10 +38,14 @@ REM-------------------------Function--------------------------
 	call git clean -fd
 	call reset --hard
 	exit /b
-:fBuild_Native
-	echo Build SO
-	cd %FBUILD%
-	call %FBUILD%\FBuild.exe -config %FBUILD_CONFIG_NATIVE%
+:fRemoveFolder
+	echo remove folder
+	REM cd %FBUILD%
+	rd /s /q "library"
+	rd /s /q "local"
+	rd /s /q "packages"
+	rd /s /q "temp"
+	pause
 	exit /b
 :fBuild_Apk
 	echo Build APK
@@ -57,9 +61,9 @@ REM------------ 00. Clean GIT.-------------
 	call :fClean
 goto :End
 
-REM------------ 01. Build Data-------------
-:Build_Data
-
+REM------------ 01. Remove folder -------------
+:RemoveFolder
+	call :fRemoveFolder
 goto :End
 REM----------------------------------------
 
