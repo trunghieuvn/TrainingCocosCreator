@@ -16,9 +16,10 @@ echo.
 echo 	  Working ON: %CUR_PATH%
 echo.
 
-echo 	0. Clean
+echo 	0. Clean GIT
 echo 	1. Remove folder auto genarate
-echo 	5. Build Full (SO + Apk)
+echo 	2. Update to HEAD
+echo 	3. Setup Cocos2dx
 
 echo 	99. Exit
 
@@ -45,6 +46,10 @@ REM-------------------------Function--------------------------
 	rd /s /q "local"
 	rd /s /q "packages"
 	rd /s /q "temp"
+:fUpdateToHead 
+	echo Update to HEAD
+	call git fetch
+	call git pull
 	pause
 	exit /b
 :fBuild_Apk
@@ -67,19 +72,17 @@ REM------------ 01. Remove folder -------------
 goto :End
 REM----------------------------------------
 
-REM------------ 03. Build APK---------------
-:Build_Apk
-	call :fBuild_Apk
+REM------------ 02. Update to HEAD---------------
+:UpdatetoHead
+	call :fUpdateToHead
 
 goto :End	
 REM----------------------------------------
 
-REM------------ 03. Build Full---------------
+REM------------ 03. SetUp Cocos2dx---------------
 :Build_Full
-	echo Build Full SO + Apk
-
-	call :fBuild_Native
-	call :fBuild_Apk
+	echo SetUp Cocos2dx
+	call :fSetup
 	
 goto :End	
 REM----------------------------------------
