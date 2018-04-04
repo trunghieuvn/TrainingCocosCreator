@@ -28,6 +28,8 @@ set /p opt=		Enter choose:
 
 if "%opt%"=="0" goto Clean
 if "%opt%"=="1" goto RemoveFolder
+if "%opt%"=="2" goto UpdatetoHead
+if "%opt%"=="3" goto SetUpCocos2dx
 
 
 REM-------------------------Function--------------------------
@@ -42,15 +44,31 @@ REM-------------------------Function--------------------------
 :fRemoveFolder
 	echo remove folder
 	REM cd %FBUILD%
+	rd /s /q "bin"
+	rd /s /q "proj.win32/hello.VC.db"
+	rd /s /q "proj.win32/Debug.win32"
+	rd /s /q "packages"
+	rd /s /q "temp"
 	rd /s /q "library"
 	rd /s /q "local"
 	rd /s /q "packages"
 	rd /s /q "temp"
+	pause
+	exit /b
+	
+:fSetUpCocos2dx
+	echo Setup
+	call cocos new hello_tmp -l cpp
+	call move hello_tmp/cocos2d %CUR_PATH%
+	rd /s /q "hello_tmp"
+	pause
+	exit /b
 :fUpdateToHead 
 	echo Update to HEAD
+	cd %CUR_PATH%
 	call git fetch
+	cd %CUR_PATH%
 	call git pull
-	pause
 	exit /b
 :fBuild_Apk
 	echo Build APK
@@ -80,9 +98,9 @@ goto :End
 REM----------------------------------------
 
 REM------------ 03. SetUp Cocos2dx---------------
-:Build_Full
+:SetUpCocos2dx
 	echo SetUp Cocos2dx
-	call :fSetup
+	call :fSetUpCocos2dx
 	
 goto :End	
 REM----------------------------------------
