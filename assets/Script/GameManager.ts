@@ -58,14 +58,14 @@ export default class GameManager extends cc.Component {
 
         for(var i = 0; i < 5; i ++ ){
            var obj =  cc.instantiate(this.prefab_CaiTrung);
+           obj.x = i * 100;
+           obj.y = i * 50;
            this.node.addChild(obj);
-
            
            var ball = obj.getComponent(Ball);
            ball.MoveObj();
            ball.setSpeed(i * 100);
-           obj.x = i * 30;
-           obj.y = i * 30;
+          
         }
     }
 

@@ -13,17 +13,17 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class Ball extends cc.Component {
 
-    public speed : number;
-
-    isMove : boolean;
+    public speed : number = 0;
+    isMove : boolean = false;
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        // this.isMove = false;
+        cc.director.getCollisionManager().enabled = true;
     }
-
+    onCollisionEnter(other, self) {
+        cc.log("Ball onCollisionEnter");
+    }
     start () {
-        // this.speed = 0;
     }
     public setSpeed(speed ) {
         this.speed = speed;
@@ -33,13 +33,12 @@ export default class Ball extends cc.Component {
         this.isMove = true;
     }
     update (dt) {
-        cc.log(this.isMove + " update : " + dt);
         if(this.isMove == false) {
             return;
         }
-
-        cc.log("Ball update spped:" + this.speed);
         var y = this.node.y;
         this.node.y = y + this.speed * dt;
     }
+
+   
 }
