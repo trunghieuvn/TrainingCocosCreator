@@ -17,6 +17,7 @@ enum GameState {
     InGame,
     GameOver
 }
+import Info from './Info';
 
 @ccclass
 export default class GameManager extends cc.Component {
@@ -31,6 +32,29 @@ export default class GameManager extends cc.Component {
     totalTime : number;
     gameState : GameState;
 
+    @property({
+        type: cc.Integer
+    })
+    myInteger = 1;
+    
+    @property
+    myNumber = 0;
+    
+    @property
+    myText = "";
+    
+    @property(cc.Node)
+    myNode: cc.Node = null;
+    
+    @property
+    myOffset = new cc.Vec2(100, 100);
+
+    @property([cc.Node])
+    public myNodes: cc.Node[] = [];
+
+    @property([cc.Color])
+    public myColors: cc.Color[] = [];
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -39,8 +63,20 @@ export default class GameManager extends cc.Component {
         this.canvas.node.on(cc.Node.EventType.TOUCH_END, 
             this.onTouchEnd.bind(this));
             this.canvas.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove.bind(this));
+            // stage 
+            // wave 
+            cc.log("width: " + this.prefab_CaiTrung.data.width);
+
+            cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown.bind(this));
     }
 
+    onKeyDown (event) {
+        switch (event.keyCode) {
+            case cc.KEY.a:
+            cc.log("Key A");
+            break;
+        }
+    }
     onTouchStart (event) {
         cc.log("GameManager onTouchStart");
     }
@@ -58,14 +94,15 @@ export default class GameManager extends cc.Component {
 
         for(var i = 0; i < 5; i ++ ){
            var obj =  cc.instantiate(this.prefab_CaiTrung);
-           obj.x = i * 100;
-           obj.y = i * 50;
            this.node.addChild(obj);
-           
+
            var ball = obj.getComponent(Ball);
            ball.MoveObj();
            ball.setSpeed(i * 100);
-          
+           obj.x = i * 170;
+           obj.y = i * 30;
+
+           ball.callbackCollider = this.GameOVer.bind(this);
         }
     }
 
@@ -90,5 +127,8 @@ export default class GameManager extends cc.Component {
         
         this.label.string = Math.floor(this.totalTime).toString();
 
+    }
+    GameOVer() {
+        cc.log("GameManager Gameover");
     }
 }

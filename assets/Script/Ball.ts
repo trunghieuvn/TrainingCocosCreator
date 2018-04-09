@@ -13,32 +13,44 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class Ball extends cc.Component {
 
-    public speed : number = 0;
-    isMove : boolean = false;
+    public speed : number;
+
+    isMove : boolean;
+
+    callbackCollider : () => void = null; 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        // this.isMove = false;
         cc.director.getCollisionManager().enabled = true;
     }
-    onCollisionEnter(other, self) {
-        cc.log("Ball onCollisionEnter");
-    }
+
     start () {
+        // this.speed = 0;
     }
     public setSpeed(speed ) {
         this.speed = speed;
     }
     public MoveObj() {
-        cc.log("MoveObj");
+        // cc.log("MoveObj");
         this.isMove = true;
     }
     update (dt) {
+        // cc.log(this.isMove + " update : " + dt);
         if(this.isMove == false) {
             return;
         }
+
+        // cc.log("Ball update spped:" + this.speed);
         var y = this.node.y;
         this.node.y = y + this.speed * dt;
     }
 
-   
+    onCollisionEnter(other, self) {
+        cc.log("Ball onCollisionEnter");
+        if(this.callbackCollider != null) 
+        {
+            this.callbackCollider();
+        }
+    }
 }
