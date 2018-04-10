@@ -17,7 +17,6 @@ enum GameState {
     InGame,
     GameOver
 }
-import Info from './Info';
 
 @ccclass
 export default class GameManager extends cc.Component {
@@ -68,6 +67,30 @@ export default class GameManager extends cc.Component {
             cc.log("width: " + this.prefab_CaiTrung.data.width);
 
             cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown.bind(this));
+
+            var ws  = new WebSocket("ws://localhost:40510");
+
+            ws.onopen = function (event) {
+                console.log("Send Text WS was opened.");
+            };
+            ws.onmessage = function (event) {
+                console.log("response text msg: " + event.data);
+            };
+            ws.onerror = function (event) {
+                console.log("Send Text fired an error");
+            };
+            ws.onclose = function (event) {
+                console.log("WebSocket instance closed.");
+            };
+            
+            setTimeout(function () {
+                if (ws.readyState === WebSocket.OPEN) {
+                    ws.send("Hello WebSocket, I'm a text message.");
+                }
+                else {
+                    console.log("WebSocket instance wasn't ready...");
+                }
+            }, 3);
     }
 
     onKeyDown (event) {
