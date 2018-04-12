@@ -17,7 +17,6 @@ enum GameState {
     InGame,
     GameOver
 }
-import Info from './Info';
 
 @ccclass
 export default class GameManager extends cc.Component {
