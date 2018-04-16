@@ -8,7 +8,9 @@ export default class GameManager extends cc.Component {
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
+    onLoad () {
+       
+    }
 
     start () {
 
