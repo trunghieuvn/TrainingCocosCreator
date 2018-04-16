@@ -63,17 +63,29 @@ export default class Player extends cc.Component {
     }
 
     onTouchEnd (touch:cc.Event.EventTouch) {
-        this.schedule(this.shoot, 0.1, this.bulletCount - 1, 0);
+        this.schedule(this.shoot, 0.5, this.bulletCount - 1, 0);
     }
 
     aim (touchLoc:cc.Vec2) {
         touchLoc = this.game.canvas.node.convertToNodeSpaceAR(touchLoc);
+        touchLoc.y = touchLoc.y < this.node.y ? this.node.y : touchLoc.y;
+
         var v1 = new cc.Vec2(touchLoc.x - this.node.x, touchLoc.y - this.node.y).normalize();
         var v2 = new cc.Vec2(1, 0); //Ox axis
         var angle = 90 - (v1.angle(v2) * 180 / Math.PI);
-        this.node.rotation = angle;
 
-        this.direction = v1;
+        //limit the rotation angle
+        if (Math.abs(angle) > 80) {
+            angle = 80 * angle / Math.abs(angle);
+        }
+        this.node.rotation = angle;
+        
+        //Set direction to shoot
+        //tan(a) = opposite / adjacent
+        var adjacent = 1; //optional
+        var opposite = adjacent * Math.tan(angle * Math.PI / 180);
+        var p = new cc.Vec2(this.node.x + opposite, this.node.y + adjacent);
+        this.direction = p.sub(this.node.position).normalize();
     }
 
     //shoot bullet
@@ -104,6 +116,7 @@ export default class Player extends cc.Component {
         }
 
         bullet.parent = parentNode;
+        bullet.getComponent("Bullet").gameManager = this.game;
         return bullet;
     }
 

@@ -10,10 +10,14 @@
 
 const {ccclass, property} = cc._decorator;
 
+import GameManager from "./GameManager";
+
 @ccclass
 export default class Bullet extends cc.Component {
 
     velocity:cc.Vec2 = null;
+    gameManager:GameManager = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -26,9 +30,30 @@ export default class Bullet extends cc.Component {
 
     update (dt) {
         this.fly(dt);
+        this.checkOutOfScreen();
+        this.checkCollisionEdge();
     }
 
     fly (dt) {
         this.node.position = this.node.position.add(this.velocity.mul(dt));
+    }
+
+    checkOutOfScreen () {
+        var canvas = this.gameManager.canvas.node;
+        if (this.node.y < (-1 * canvas.height / 2) - this.node.height * this.node.scaleY
+            || this.node.y > (canvas.height / 2) + this.node.height * this.node.scaleY) {
+                console.log("BULLET DESTROYED");
+                this.node.destroy();
+            }        
+    }
+
+    checkCollisionEdge () {
+        var canvas = this.gameManager.canvas.node;
+        if (this.node.x < (-1 * canvas.width / 2) + this.node.width / 2 * this.node.scaleX
+            || this.node.x > canvas.width / 2 - this.node.width / 2 * this.node.scaleX) {
+
+            //this.node.x -= this.node.x / Math.abs(this.node.x);
+            this.velocity.x = -this.velocity.x;
+        }
     }
 }
