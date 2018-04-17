@@ -17,6 +17,7 @@ export default class Bullet extends cc.Component {
 
     velocity:cc.Vec2 = null;
     gameManager:GameManager = null;
+    bulletPool:cc.NodePool = null;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -25,13 +26,21 @@ export default class Bullet extends cc.Component {
     }
 
     start () {
-        console.log("Bullet Velocity = " + this.velocity.x + ", " + this.velocity.y);
+        
     }
 
     update (dt) {
         this.fly(dt);
         this.checkOutOfScreen();
         this.checkCollisionEdge();
+    }
+
+    reuse (pool) {
+        this.bulletPool = pool;
+    }
+
+    unuse () {
+
     }
 
     fly (dt) {
@@ -42,9 +51,10 @@ export default class Bullet extends cc.Component {
         var canvas = this.gameManager.canvas.node;
         if (this.node.y < (-1 * canvas.height / 2) - this.node.height * this.node.scaleY
             || this.node.y > (canvas.height / 2) + this.node.height * this.node.scaleY) {
-                console.log("BULLET DESTROYED");
-                this.node.destroy();
-            }        
+                
+                //destroy bullet
+                this.bulletPool.put(this.node);
+        }        
     }
 
     checkCollisionEdge () {
@@ -56,4 +66,5 @@ export default class Bullet extends cc.Component {
             this.velocity.x = -this.velocity.x;
         }
     }
+
 }

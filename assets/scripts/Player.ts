@@ -18,7 +18,7 @@ export default class Player extends cc.Component {
 
     game = null;
     bulletSpeed:number = 0;
-    poolNode:cc.NodePool = null;
+    bulletPool:cc.NodePool = null;
     bulletCount:number = 0;
     accumulationBullet:number = 0;
     direction:cc.Vec2 = null;
@@ -36,18 +36,18 @@ export default class Player extends cc.Component {
         this.prepareBullet.active = false;
 
         //init pool of bullet prefabs
-        this.poolNode = new cc.NodePool();
+        this.bulletPool = new cc.NodePool("Bullet");
         for (let i = 0; i < ESTIMATE_POOL_SIZE; i++) {
             var bullet = cc.instantiate(this.bulletPrefab);
-            this.poolNode.put(bullet);
+            this.bulletPool.put(bullet);
         }
     }
 
     start () {
-        this.bulletSpeed = 500;
+        this.bulletSpeed = 800;
         this.accumulationBullet = 5;
         this.bulletCount = this.accumulationBullet;
-        this.bulletCountLabel.string = "x" + this.bulletCount.toString(); 
+        this.bulletCountLabel.string = "x" + this.bulletCount.toString();
     }
 
     // update (dt) {}
@@ -63,7 +63,7 @@ export default class Player extends cc.Component {
     }
 
     onTouchEnd (touch:cc.Event.EventTouch) {
-        this.schedule(this.shoot, 0.5, this.bulletCount - 1, 0);
+        this.schedule(this.shoot, 0.1, this.bulletCount - 1, 0);
     }
 
     aim (touchLoc:cc.Vec2) {
@@ -101,16 +101,19 @@ export default class Player extends cc.Component {
         this.bulletCount--;
         this.bulletCountLabel.string = "x" + this.bulletCount.toString();
 
-        //reset bullet count
+        //when shoot action completed
         if (this.bulletCount <= 0) {
+            //reset bullet count
             this.bulletCount = this.accumulationBullet;
+            this.game.moveDownBubbles();
+            this.game.spawnBubbles();
         }
     }
 
     createBullet (parentNode:cc.Node) : cc.Node {
         var bullet = null;
-        if (this.poolNode.size() > 0) {
-            bullet = this.poolNode.get();
+        if (this.bulletPool.size() > 0) {
+            bullet = this.bulletPool.get(this.bulletPool);
         } else {
             bullet = cc.instantiate(this.bulletPrefab);
         }
