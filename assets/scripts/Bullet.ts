@@ -23,6 +23,7 @@ export default class Bullet extends cc.Component {
 
     onLoad () {
         this.velocity = new cc.Vec2(0, 0);
+        cc.director.getCollisionManager().enabled = true;
     }
 
     start () {
@@ -62,9 +63,26 @@ export default class Bullet extends cc.Component {
         if (this.node.x < (-1 * canvas.width / 2) + this.node.width / 2 * this.node.scaleX
             || this.node.x > canvas.width / 2 - this.node.width / 2 * this.node.scaleX) {
 
-            //this.node.x -= this.node.x / Math.abs(this.node.x);
+            this.node.x = this.node.x / Math.abs(this.node.x) * (-1 + canvas.width / 2 - this.node.width / 2 * this.node.scaleX);
             this.velocity.x = -this.velocity.x;
         }
     }
 
+
+    onCollisionEnter (other: cc.CircleCollider, self: cc.CircleCollider) {
+        if (other.tag == 0) {      //bubble
+            if (other.node.color.toHEX("#rrggbb") == this.node.color.toHEX("#rrggbb")) {
+                other.node.getComponent("Bubble").hitMany();
+            }
+            else {
+                other.node.getComponent("Bubble").hitOne();
+            }
+        } 
+
+        this.hit();
+    }
+
+    hit () {
+        this.bulletPool.put(this.node);
+    }
 }

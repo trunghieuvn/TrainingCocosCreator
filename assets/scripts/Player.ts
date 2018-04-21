@@ -22,6 +22,8 @@ export default class Player extends cc.Component {
     bulletCount:number = 0;
     accumulationBullet:number = 0;
     direction:cc.Vec2 = null;
+    bulletColor: cc.Color;
+    
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -33,7 +35,10 @@ export default class Player extends cc.Component {
         this.game.canvas.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd.bind(this));
         
         //hide prepareBullet
-        this.prepareBullet.active = false;
+        //this.prepareBullet.active = false;
+
+        this.bulletColor = this.game.levelColorList[0];
+        this.prepareBullet.color = this.bulletColor;
 
         //init pool of bullet prefabs
         this.bulletPool = new cc.NodePool("Bullet");
@@ -44,7 +49,7 @@ export default class Player extends cc.Component {
     }
 
     start () {
-        this.bulletSpeed = 800;
+        this.bulletSpeed = 1200;
         this.accumulationBullet = 5;
         this.bulletCount = this.accumulationBullet;
         this.bulletCountLabel.string = "x" + this.bulletCount.toString();
@@ -63,7 +68,7 @@ export default class Player extends cc.Component {
     }
 
     onTouchEnd (touch:cc.Event.EventTouch) {
-        this.schedule(this.shoot, 0.1, this.bulletCount - 1, 0);
+        this.schedule(this.shoot, 0.2, this.bulletCount - 1, 0);
     }
 
     aim (touchLoc:cc.Vec2) {
@@ -91,6 +96,7 @@ export default class Player extends cc.Component {
     //shoot bullet
     shoot () {
         var newBullet = this.createBullet(this.game.canvas.node);
+        newBullet.color = this.bulletColor;
 
         var bulletWorldPos = this.prepareBullet.parent.convertToWorldSpaceAR(this.prepareBullet.position);
         newBullet.setPosition(this.game.canvas.node.convertToNodeSpaceAR(bulletWorldPos));
@@ -107,6 +113,10 @@ export default class Player extends cc.Component {
             this.bulletCount = this.accumulationBullet;
             this.game.moveDownBubbles();
             this.game.spawnBubbles();
+
+            //random color again
+            this.bulletColor = this.game.randomColor(this.game.level);
+            this.prepareBullet.color = this.bulletColor;
         }
     }
 

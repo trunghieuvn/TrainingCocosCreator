@@ -18,6 +18,9 @@ export default class GameManager extends cc.Component {
     isSpawnFull:boolean = false; //spawn interleave flag
     bubblePool:cc.NodePool = null;
     bubbleContainer:cc.Node[] = [];
+    level: number;
+    levelColorList: cc.Color[] = [cc.Color.BLUE, cc.Color.GREEN, cc.Color.YELLOW, cc.Color.ORANGE, cc.Color.RED,
+        cc.Color.CYAN, cc.Color.GRAY, cc.Color.MAGENTA];
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -28,6 +31,8 @@ export default class GameManager extends cc.Component {
            var bubble = cc.instantiate(this.bubblePrefab);
            this.bubblePool.put(bubble);
        }
+
+       this.level = 2;
     }
 
 
@@ -81,7 +86,7 @@ export default class GameManager extends cc.Component {
                 let bubble = this.createBubble();
                 bubble.setPosition(position);
                 bubble.getComponent("Bubble").isRootBubble = true;
-                bubble.getChildByName("BubbleValue").getComponent("cc.Label").string = "1";
+                bubble.color = this.randomColor(this.level);
             }
         }
         else {
@@ -90,7 +95,7 @@ export default class GameManager extends cc.Component {
                     let x = bubble.x + bubble.width / 2;
                     if (x >= -1 * this.canvas.node.width / 2 + (bubble.width / 2) + bubble.width * (MAX_BUBBLE_NUMBER_ON_SCREEN_WIDTH  - 1)) {
                         x -= bubble.width;
-                        bubble.getChildByName("BubbleValue").getComponent("cc.Label").string = "T"; // ###################################   
+                        //bubble.getChildByName("BubbleValue").getComponent("cc.Label").string = "T"; // ###################################   
                     }
                     let y = (this.topBar.y - this.topBar.height / 2) - bubble.height / 2;
                     positionSpawnList.push(new cc.Vec2(x, y));
@@ -127,7 +132,7 @@ export default class GameManager extends cc.Component {
                 let bubble = this.createBubble();
                 bubble.setPosition(position);
                 bubble.getComponent("Bubble").isRootBubble = true;
-                bubble.getChildByName("BubbleValue").getComponent("cc.Label").string = "1";
+                bubble.color = this.randomColor(this.level);
             }
         }
 
@@ -171,6 +176,7 @@ export default class GameManager extends cc.Component {
                 for (let bubble_b of this.bubbleContainer) {
                     if (this.checkNeighbourBubble(bubble_a, bubble_b) == true && bubble_a != bubble_b) {
                         bubble_a.getComponent("Bubble").neighbourBubbles.push(bubble_b);
+                        bubble_b.getComponent("Bubble").neighbourBubbles.push(bubble_a);
                     }
                 }
             }
@@ -214,9 +220,9 @@ export default class GameManager extends cc.Component {
             selectedBubbles.push(component[0]);
         }
 
-        for (let i of selectedBubbles) {
-            i.getChildByName("BubbleValue").getComponent("cc.Label").string = "C";
-        }
+        // for (let i of selectedBubbles) {
+        //     i.getChildByName("BubbleValue").getComponent("cc.Label").string = "C";
+        // }
 
         return selectedBubbles;
     }
@@ -226,5 +232,14 @@ export default class GameManager extends cc.Component {
         for (let bubble of this.bubbleContainer) {
             bubble.getComponent("Bubble").isRootBubble = false;
         }
+    }
+
+
+    randomColor (level:number): cc.Color {
+        
+        let colorIndex: number;
+        colorIndex = Math.floor(Math.random() * level);
+        
+        return this.levelColorList[colorIndex];
     }
 }
