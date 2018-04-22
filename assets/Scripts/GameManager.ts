@@ -10,6 +10,7 @@
 
 const {ccclass, property} = cc._decorator;
 
+import Egg from './Egg';
 @ccclass
 export default class GameManager extends cc.Component {
 
@@ -22,7 +23,23 @@ export default class GameManager extends cc.Component {
     isPlay : boolean = false;
 
     @property(cc.Canvas) canvas : cc.Canvas = null;
+
+    @property(cc.Prefab) prfabEgg : cc.Prefab = null;
     // LIFE-CYCLE CALLBACKS:
+
+    start () {
+        for(var i = 1; i < 4; i ++) {
+            var obj = cc.instantiate(this.prfabEgg);
+            obj.x = i * 50;
+            obj.y = 300;
+
+            var egg = obj.getComponent(Egg);
+            egg.setSpeed(i * 200);
+
+            this.canvas.node.addChild(obj);
+        }
+    }
+
     onLoad () {
         this.canvas.node.on(cc.Node.EventType.TOUCH_START, 
             this.ontouchStart.bind(this));
@@ -41,9 +58,7 @@ export default class GameManager extends cc.Component {
     ontouchMove() {
         cc.log("onTOuchMove")
     }
-    start () {
-        // this.totalTime = 0;
-    }
+    
 
     update (dt) {
         if (this.isPlay == true)
