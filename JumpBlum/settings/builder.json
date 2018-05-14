@@ -1,0 +1,37 @@
+{
+  "appKey": "",
+  "appSecret": "",
+  "encryptJs": true,
+  "excludeScenes": [],
+  "includeAnySDK": false,
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "jailbreakPlatform": false,
+  "md5Cache": false,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "optimizeHotUpdate": false,
+  "orientation": {
+    "landscapeLeft": false,
+    "landscapeRight": false,
+    "portrait": true,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.Physical",
+  "privateKey": "",
+  "renderMode": "0",
+  "startScene": "d1e3a018-5de6-4dfa-bbdd-22f890afb4b4",
+  "title": "JumpBlum",
+  "webOrientation": "auto",
+  "wechatgame": {
+    "appid": "wx6ac3f5090a6b99c5",
+    "orientation": "portrait"
+  },
+  "xxteaKey": "929437f8-580b-40",
+  "zipCompressJs": true,
+  "qqplay": {
+    "orientation": "portrait"
+  },
+  "fb-instant-games": {}
+}
