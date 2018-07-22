@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "2e0461a0-0602-4d9b-a80f-c925835b963d",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "RPGpack_sheet": {
+      "ver": "1.0.3",
+      "uuid": "47922496-6f0b-42d5-9cc2-8f4503dad9da",
+      "rawTextureUuid": "2e0461a0-0602-4d9b-a80f-c925835b963d",
+      "trimType": "custom",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -355,
+      "offsetY": -299,
+      "trimX": 250,
+      "trimY": 640,
+      "width": 70,
+      "height": 150,
+      "rawWidth": 1280,
+      "rawHeight": 832,
+      "borderTop": 150,
+      "borderBottom": 0,
+      "borderLeft": 70,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
