@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "6e055371-e120-4603-afa5-17bba481b407",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "rpgTile019": {
+      "ver": "1.0.3",
+      "uuid": "d1740749-8b09-4378-ada2-32d220d349f9",
+      "rawTextureUuid": "6e055371-e120-4603-afa5-17bba481b407",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 64,
+      "height": 64,
+      "rawWidth": 64,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
