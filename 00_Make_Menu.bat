@@ -58,7 +58,7 @@ REM-------------------------Function--------------------------
 	
 :fBuildAndroid
 	echo Build Andorid
-	call %COCOS_TOOL% --path %CUR_PATH% --build "platform=android;debug=true"
+	call %COCOS_TOOL% --path %CUR_PATH% --build "platform=android;debug=true;autoCompile=true"
 
 	pause
 	exit /b
