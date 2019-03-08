@@ -1,0 +1,75 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "birdFlapping",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.75,
+  "sample": 60,
+  "speed": 2,
+  "wrapMode": "2",
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "4cfdfdf3-5a09-4f16-bf27-40ec26a8738a"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "c5fcc981-b61c-47cb-83ea-1cc68f7bd1f4"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "01b35452-184c-4db7-8a71-22970501ada0"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "4cfdfdf3-5a09-4f16-bf27-40ec26a8738a"
+            }
+          }
+        ]
+      }
+    },
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            0,
+            5
+          ]
+        },
+        {
+          "frame": 0.25,
+          "value": [
+            0,
+            15
+          ]
+        },
+        {
+          "frame": 0.5,
+          "value": [
+            0,
+            10
+          ]
+        },
+        {
+          "frame": 0.75,
+          "value": [
+            0,
+            5
+          ]
+        }
+      ]
+    }
+  },
+  "events": []
+}
