@@ -26,9 +26,7 @@ export default class NewClass extends cc.Component {
     @property(cc.Button) btnStart: cc.Button = null;
     @property(cc.Button) btnEnd: cc.Button = null;
 
-    @property(cc.Prefab) prefab_CaiTrung : cc.Prefab = null;
-    @property(cc.Prefab) prefab_CaiTrung2 : cc.Prefab = null;
-    
+    @property(cc.Prefab) prefab_CaiTrung: cc.Prefab = null;
     @property(cc.Label)
     label: cc.Label = null;
 
@@ -42,14 +40,21 @@ export default class NewClass extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+
+        for(var i =1; i<5;i++){
+            var obj_ball =  cc.instantiate(this.prefab_CaiTrung);
+            obj_ball.x = -300 ;//+ 300 *i;
+            this.node.addChild(obj_ball);
+        }
+        
         // this.canvassss = this.getComponent(cc.Canvas);
         //this.node.active = false;
         cc.log("onload");
         //this.node.scaleX = 2;
         //this.label.string = "mot";
 
-        this.canvassss.node.on(cc.Node.EventType.TOUCH_START,
-            this.onTouchStart.bind(this));
+        //this.canvassss.node.on(cc.Node.EventType.TOUCH_START,
+        //    this.onTouchStart.bind(this));
         // this.canvas.node.on(cc.Node.EventType.TOUCH_END,
         //     this.onTouchEnd.bind(this));
     }
@@ -69,7 +74,7 @@ export default class NewClass extends cc.Component {
     }
     update(dt) {
 
-        return; 
+       
         switch (this.state) {
             case GameState.Start:
                 break;
@@ -88,6 +93,8 @@ export default class NewClass extends cc.Component {
     }
     btnPlay() {
         this.state = GameState.InGame;
+
+        
         //this.btnStart.node.active =false;
         //this.btnEnd.node.active =false;
         //cc.log("11");

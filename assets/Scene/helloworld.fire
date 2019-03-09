@@ -15,9 +15,12 @@
     "_children": [
       {
         "__id__": 2
+      },
+      {
+        "__id__": 28
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 0,
     "_components": [],
     "_prefab": null,
@@ -41,9 +44,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.3572916666666667,
-      "y": 0.3572916666666667,
-      "z": 0.3572916666666667
+      "x": 0.240625,
+      "y": 0.240625,
+      "z": 0.240625
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -86,7 +89,7 @@
       }
     ],
     "_active": true,
-    "_level": 0,
+    "_level": 1,
     "_components": [
       {
         "__id__": 26
@@ -548,7 +551,6 @@
     "btnStart": null,
     "btnEnd": null,
     "prefab_CaiTrung": null,
-    "prefab_CaiTrung2": null,
     "label": {
       "__id__": 13
     },
@@ -850,7 +852,6 @@
     },
     "btnEnd": null,
     "prefab_CaiTrung": null,
-    "prefab_CaiTrung2": null,
     "label": null,
     "text": "hello",
     "_id": "e1Xix53tBN06TsqCsD7B9b"
@@ -1168,15 +1169,68 @@
       "__id__": 24
     },
     "prefab_CaiTrung": {
-      "__uuid__": "8e159401-03e9-4d82-9869-216d8c8dc82d"
-    },
-    "prefab_CaiTrung2": {
-      "__uuid__": "8e159401-03e9-4d82-9869-216d8c8dc82d"
+      "__uuid__": "7d49f7f8-81b1-49b2-9f6d-6751ef623492"
     },
     "label": {
       "__id__": 11
     },
     "text": "hellomkm",
     "_id": "780YFlCaZBAJRwL2GkNQh3"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Test",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": true,
+    "_level": 1,
+    "_components": [],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 320,
+      "y": 480,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_quat": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_zIndex": 0,
+    "_is3DNode": false,
+    "groupIndex": 0,
+    "_id": "e22VlLMf1KgKvYzfcNEyh8"
   }
 ]
