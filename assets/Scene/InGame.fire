@@ -17,7 +17,7 @@
         "__id__": 2
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 0,
     "_components": [],
     "_prefab": null,
@@ -41,9 +41,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.70625,
-      "y": 0.70625,
-      "z": 0.70625
+      "x": 0.4637012004852295,
+      "y": 0.4637012004852295,
+      "z": 0.4637012004852295
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -56,7 +56,7 @@
     "_is3DNode": true,
     "groupIndex": 0,
     "autoReleaseAssets": false,
-    "_id": "2d2f792f-a40c-49bb-a189-ed176a246e49"
+    "_id": "47b5cdb1-74b9-49da-835a-cfd9c43e020a"
   },
   {
     "__type__": "cc.Node",
@@ -68,24 +68,25 @@
     "_children": [
       {
         "__id__": 3
+      },
+      {
+        "__id__": 5
       }
     ],
     "_active": true,
-    "_level": 1,
+    "_level": 0,
     "_components": [
       {
-        "__id__": 6
+        "__id__": 7
       }
     ],
-    "_prefab": {
-      "__id__": 7
-    },
+    "_prefab": null,
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 252,
-      "g": 252,
-      "b": 252,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -122,9 +123,7 @@
     "_zIndex": 0,
     "_is3DNode": false,
     "groupIndex": 0,
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_id": "a286bbGknJLZpRpxROV6M94"
+    "_id": "c8M3L4R+tInpzrajesPrRj"
   },
   {
     "__type__": "cc.Node",
@@ -135,15 +134,13 @@
     },
     "_children": [],
     "_active": true,
-    "_level": 2,
+    "_level": 1,
     "_components": [
       {
         "__id__": 4
       }
     ],
-    "_prefab": {
-      "__id__": 5
-    },
+    "_prefab": null,
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
@@ -186,7 +183,7 @@
     "_zIndex": 0,
     "_is3DNode": false,
     "groupIndex": 0,
-    "_id": "f9g5UgJf1EvIu4eBCuBOvi"
+    "_id": "8dHdsoU7VDlLoeS6ZLDWhh"
   },
   {
     "__type__": "cc.Camera",
@@ -220,16 +217,83 @@
       "width": 1,
       "height": 1
     },
-    "_id": "65VK1FUGlLxIAclrWHbnD7"
+    "_id": "caDr9XVVZGq7gtWtmAGxFn"
   },
   {
-    "__type__": "cc.PrefabInfo",
-    "root": {
+    "__type__": "cc.Node",
+    "_name": "GameWorld",
+    "_objFlags": 0,
+    "_parent": {
       "__id__": 2
     },
-    "asset": null,
-    "fileId": "f9g5UgJf1EvIu4eBCuBOvi",
-    "sync": false
+    "_children": [],
+    "_active": true,
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 6
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": -54,
+      "y": -62,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_quat": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_zIndex": 0,
+    "_is3DNode": false,
+    "groupIndex": 0,
+    "_id": "43fWJAE7pATK5fGMA9wnpv"
+  },
+  {
+    "__type__": "1ba29QEKHxL661DNhzSBg+t",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 5
+    },
+    "_enabled": true,
+    "prefabBall": {
+      "__uuid__": "7ab8876e-fe6c-49e9-b0e6-c316d1d94eec"
+    },
+    "canvas": {
+      "__id__": 7
+    },
+    "_id": "a0pA5pGK1DDYbne6TqIyR2"
   },
   {
     "__type__": "cc.Canvas",
@@ -244,17 +308,8 @@
       "width": 640,
       "height": 960
     },
-    "_fitWidth": true,
-    "_fitHeight": false,
-    "_id": "e152ms5fNOzbuONYkZQznO"
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 2
-    },
-    "asset": null,
-    "fileId": "a286bbGknJLZpRpxROV6M94",
-    "sync": false
+    "_fitWidth": false,
+    "_fitHeight": true,
+    "_id": "a2awGWQHZItYKr+RqA1Btg"
   }
 ]
