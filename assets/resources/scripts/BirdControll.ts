@@ -1,5 +1,3 @@
-import BirdControll from "./BirdControll";
-
 // Learn TypeScript:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/typescript.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/typescript.html
@@ -12,39 +10,45 @@ import BirdControll from "./BirdControll";
 
 const {ccclass, property} = cc._decorator;
 
-
-enum BirdState {
-    Ready, Rise, FreeFall, Drop, Dead
-}
 @ccclass
-export default class Game extends cc.Component {
-
-
-    @property(cc.Canvas) canvas : cc.Canvas = null;
-    @property(cc.Node) readly : cc.Node = null;
-
-    @property(cc.Node) bird : cc.Node = null;
-    // PRIVATE 
-    isPlayed : boolean = false;
+export default class BirdControll extends cc.Component {
 
     
+    @property initRiseSpeed : number = 800;
+    @property gravity : number = 1000;
+
+
+    currentSpeed : number = 0;
+
+    init() {
+        this.currentSpeed = 0;
+    }
+
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
-        this.canvas.node
-        .on(cc.Node.EventType.TOUCH_START, 
-                    this.onTouchStart.bind(this));
+       
     }
-    onTouchStart() {
-        cc.log("PLAY ..");
-        this.isPlayed = true;
-        this.readly.active = false;
 
-        this.bird.getComponent(BirdControll).rise();
-    }
     start () {
-        
+
     }
 
-    update (dt) {}
+    update (dt) {
+        this._updatePosition(dt);
+    }
+    rise() {
+        this.currentSpeed = this.initRiseSpeed;
+        // this._runRiseAction();
+    }
 
+    _runRiseAction(){
+        this.node.stopAllActions();
+        let jumpAction = cc.rotateTo(0.3, -30).easing(cc.easeCubicActionOut());
+        this.node.runAction(jumpAction);
+    }
+
+    _updatePosition(dt) {
+        this.currentSpeed -= dt * this.gravity;
+        this.node.y += dt * this.currentSpeed;
+    }
 }
