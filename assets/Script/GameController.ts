@@ -25,29 +25,65 @@ export default class GameController extends cc.Component {
       cc.log('onload')
 
       this.canvas.node.on(cc.Node.EventType.TOUCH_START, this.onCanvasTouchStart.bind(this));
+      // this.canvas.node.on('touchmove', function (event) {
+      //   event.
+      //   var delta = event.touch.getDelta();
+
+      //   this.x += delta.x;
+      //   this.y += delta.y;
+
+      // }, this.node);
 
       // this.node.active = false;
-        // this.node.scale = 4
+      // this.node.scale = 4
       // this.canvas.node.on(cc.Node.EventType.TOUCH_END, this._onCanvasTouchStart2.bind(this))
-      for(var i = 0; i < 5; i ++ ){
-        var obj =  cc.instantiate(this.prefabBall);
-        obj.x = i * 30;
-        obj.y = i * 30;
-        this.node.addChild(obj);
+    //   for(var i = 0; i < 5; i++) {
+    //     var obj =  cc.instantiate(this.prefabBall);
+
+    //     var ball = obj.getComponent(Ball);
+    //     var dir = i;
+    //     if (dir % 2 == 0) {
+    //       dir *= -1;
+    //     }
+    //     obj.x = dir * 80;//ball.node.width;
+    //     obj.y = dir * 80;//ball.node.width;
         
-        var ball = obj.getComponent(Ball);
-       //  ball.MoveObj();
-       //  ball.setSpeed(i * 100);     
-     }
- 
+    //     ball.setSpeed(dir * 100);
+    //     this.node.addChild(obj);
+    //  }
 	}
 
-  onCanvasTouchStart () {
+  onCanvasTouchStart(event: cc.Event.EventCustom) {
+    // touch.
+    // event.touch
+    cc.log(event);
+    cc.log(event.touch._point.x + " " + event.touch._point.y);
+    
     var obj =  cc.instantiate(this.prefabBall);
-    obj.x = 30;
-    obj.y = 30;
+
+    //obj.convertToNodeSpace(this.canvas.node.getPosition());
+
+    obj.x = event.touch._point.x;
+    obj.y = event.touch._point.y;
+    var newPos = obj.convertToNodeSpace(this.node.position);
+    obj.x = newPos.x;
+    obj.y = newPos.y;
+    // new cc.Vec2(event.touch._point.x, event.touch._point.y)
+
+    var ball = obj.getComponent(Ball);
+    ball.addCollistionCallback(this.collistionCallback.bind(ball));
+
+    this.totalBall += 1;
+    ball.setName('ball ' + this.totalBall)
     this.node.addChild(obj);
   }
+
+  totalBall = 0;
+
+  collistionCallback(ball) {
+    cc.log("collistionCallback");
+  }
+  
   // start () {
     // this.totalTime = 0;
     // this.gameState = GameState.Started;
