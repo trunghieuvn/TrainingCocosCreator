@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "logo",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.18333333333333332,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {},
+  "events": [
+    {
+      "frame": 0.08333333333333333,
+      "func": "",
+      "params": []
+    },
+    {
+      "frame": 0.15,
+      "func": "",
+      "params": []
+    },
+    {
+      "frame": 0.18333333333333332,
+      "func": "",
+      "params": []
+    }
+  ]
+}
