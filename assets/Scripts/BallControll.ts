@@ -17,10 +17,34 @@ export default class BallControll extends cc.Component {
 
     @property dir : number = 1;
 
+    @property count : number = 0;
+
+
+    callbackCollider : () => void = null; 
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         cc.log("Ball speed: " + this.speed);
+        cc.director.getCollisionManager().enabled = true;
+    }
+
+
+    onCollisionEnter(other, self) {
+        cc.log("Ball onCollisionEnter");
+        this.changeDir();
+        if(this.callbackCollider != null) 
+        {
+            this.callbackCollider();
+        }
+    }
+
+    onCollisionExit (other, self) {
+        cc.log("Ball onCollisionExit");
+    }
+
+    onCollisionStay (other, self) {
+     
     }
 
     start () {

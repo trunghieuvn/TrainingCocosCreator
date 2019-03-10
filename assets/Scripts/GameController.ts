@@ -21,21 +21,33 @@ export default class GameController extends cc.Component {
     @property
     text: string = 'hello';
 
+
+
+    @property (cc.Canvas) canvas : cc.Canvas = null;
+
     @property(cc.Prefab) ball_prefab : cc.Prefab = null;
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-
-        cc.log("aaaa");
-        for(var i =0; i <3; i++) {
+        //this.canvas.node.on(cc.Node.EventType.TOUCH_END,this.touchEnd.bind(this));
+        for(var i =0; i < 2; i++) {
             var obj_ball = cc.instantiate(this.ball_prefab);
             obj_ball.x = -200 + 300 * i;
             var ball = obj_ball.getComponent(BallControll);
             if (i % 2)
                 ball.changeDir();
             this.node.addChild(obj_ball);
+            ball.callbackCollider = this.countTouch.bind(this);
         }
+    }
+
+    touchEnd(customerData : cc.Event.EventCustom) {
+
+    }
+
+    countTouch() {
+        cc.log("count Touch");
     }
 
     start () {
