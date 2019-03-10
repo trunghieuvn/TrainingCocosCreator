@@ -10,36 +10,40 @@
 
 const {ccclass, property} = cc._decorator;
 
-// import BallControll from './ballcontroll';
-
+import BallControll from '../ballcontroll';
 @ccclass
-export default class BallControler extends cc.Component {
+export default class NewClass extends cc.Component {
 
-    // @property(cc.Label)
-    // label: cc.Label = null;
-    @property(cc.Prefab) ball : cc.Prefab = null;
-
+    @property(cc.Label) counttxt: cc.Label = null;
     @property
-    text: string = 'hello';
+    count: number = 0;
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        for(var i = 0; i < 3; i++) {
-            var obj_ball = cc.instantiate(this.ball);
-            obj_ball.x = 100 * i;
-            this.node.addChild(obj_ball);
-        }
+
+        cc.director.getCollisionManager().enabled = true;
+        // this.counttxt.string = "asd";
+
     }
 
+    onCollisionEnter(other, self) {
+        // cc.log("Ball onCollisionEnter");
+        var BallCT = other.node.getComponent(BallControll);
+        BallCT.changeDir();
+        this.count += 1;
+        this.counttxt.string = this.count;
+    }
+
+    onCollisionExit (other, self) {
+        // cc.log("Ball onCollisionExit");
+    }
+    onCollisionStay (other, self) {
+        // cc.log("Ball onCollisionStay");
+    }
     start () {
 
     }
 
-    
-    update (dt) {
-        
-        
-    }
-
+    // update (dt) {}
 }

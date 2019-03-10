@@ -4,8 +4,12 @@
      export default class BallControll extends cc.Component {
          public speed : number = 100;
          isMove : boolean = true;
+         @property
+         dir: number = 1;
+
          // LIFECYCLE CALLBACKS:
          onLoad () {
+            cc.director.getCollisionManager().enabled = true;
              // this.isMove = false;
          }
          start () {
@@ -23,12 +27,25 @@
         //  if(this.isMove == false) {
         //      return;
         //  }
-            cc.log("Ball update spped:" + this.speed);
+            // cc.log("Ball update spped:" + this.speed);
             var y = this.node.y;
-            this.node.y = y + this.speed * dt;
+            this.node.y = y + this.speed * dt * this.dir;
+            
         }
-        changeDir() {
+        // onCollisionEnter(other, self) {
+        //     this.changeDir();
+        //     this.count++;
+        // }
+    
+        // onCollisionExit (other, self) {
+        //     // cc.log("Ball onCollisionExit");
+        // }
+        // onCollisionStay (other, self) {
+        //     // cc.log("Ball onCollisionStay");
+        // }
         
+        changeDir() {
+            this.dir *= -1;
         }
         }
 
