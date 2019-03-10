@@ -9,9 +9,13 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
 const {ccclass, property} = cc._decorator;
+import GameWorld from './GameWorld';
 
 @ccclass
 export default class Player extends cc.Component {
+    // ========================= Properties ===========================
+    @property(cc.Node) gameWorld: cc.Node = null;
+
     // ========================= Members ==============================
     public isMoving: boolean = false;
 
@@ -31,6 +35,7 @@ export default class Player extends cc.Component {
         let actionFlip = cc.callFunc(() => {
             this.node.scaleX *= -1;
             this.isMoving = false;
+            this.gameWorld.getComponent(GameWorld).spawnTower();
         });
         let sequence = cc.sequence(actionMoveTo, actionFlip);
 

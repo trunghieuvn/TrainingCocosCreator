@@ -495,6 +495,9 @@
       "__id__": 9
     },
     "_enabled": true,
+    "gameWorld": {
+      "__id__": 5
+    },
     "_id": "e0wWKutvBHsL+I0100dLMV"
   },
   {

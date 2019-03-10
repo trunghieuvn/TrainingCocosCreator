@@ -32,6 +32,7 @@ export default class GameWorld extends cc.Component {
 
     start () {
         this.spawnTower();
+        this.spawnTower();
     }
 
     // update (dt) {}
@@ -46,7 +47,7 @@ export default class GameWorld extends cc.Component {
         return tower;
     }
 
-    private spawnTower () {
+    public spawnTower () {
         // random position
         let newTower: cc.Node = null;
         let x, y;
@@ -71,7 +72,6 @@ export default class GameWorld extends cc.Component {
     }
 
     public onTouchStart (touch: cc.Event.EventTouch) {
-        this.spawnTower();
         let worldPos = this.tailTower.convertToWorldSpaceAR(this.tailTower.getChildByName('Top').position);
         let nodePos = this.node.convertToNodeSpaceAR(worldPos);
         this.player.getComponent(Player).move(nodePos.x, nodePos.y);
