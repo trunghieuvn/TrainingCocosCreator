@@ -7,17 +7,24 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
+import Level from './Level';
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class GameSetting extends cc.Component {
 
     @property(cc.Label)
     label: cc.Label = null;
 
     @property
     text: string = 'hello';
+    
+    @property([cc.Prefab])
+    listLevel = [];
+    
+    @property
+    speed: number = 750;
 
     // LIFE-CYCLE CALLBACKS:
 

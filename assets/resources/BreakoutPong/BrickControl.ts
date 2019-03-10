@@ -11,21 +11,29 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
-
-    @property(cc.Label)
-    label: cc.Label = null;
-
-    @property
-    text: string = 'hello';
+export default class BrickControl extends cc.Component {
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
-
-    start () {
-
+    onLoad () {
+        cc.director.getCollisionManager().enabled = true;
     }
 
-    // update (dt) {}
+    start () {
+    }
+
+    update (dt) {
+    }
+
+    collisionCallback: () => void
+    setCollisionCallback(collisionCallback) {
+        this.collisionCallback = collisionCallback;
+    }
+
+    onCollisionEnter(nodeOther, nodeSelf) {
+        if (this.collisionCallback != null) {
+            this.collisionCallback();
+        }
+        this.node.active = false;
+    }
 }

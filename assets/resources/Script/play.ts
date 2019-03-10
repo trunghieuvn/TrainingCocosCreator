@@ -37,26 +37,26 @@ export default class Play extends cc.Component {
 
 	}
 
-    start () {
-		  cc.log('onstart')
-    }
+  start () {
+    cc.log('onstart')
+  }
 
-    update (dt) {
-      cc.log("GameManager update dt:" + dt);
-      this.totalTime += dt;
-      this.label.string = Math.floor(this.totalTime).toString();
-    }
+  update (dt) {
+    cc.log("GameManager update dt:" + dt);
+    this.totalTime += dt;
+    this.label.string = Math.floor(this.totalTime).toString();
+  }
 
-    _onCanvasTouchStart2() {
-      cc.log("_onCanvasTouchStart2");
-      // event.
-      this.totalTime = 0;
-    }
+  _onCanvasTouchStart2() {
+    cc.log("_onCanvasTouchStart2");
+    // event.
+    this.totalTime = 0;
+  }
 
-    onTouchStart2(event) {
-      cc.log("GameManager onTouchStart " + event);
-      // event.
-      this.totalTime = 0;
-    }
+  onTouchStart2(event) {
+    cc.log("GameManager onTouchStart " + event);
+    // event.
+    this.totalTime = 0;
+  }
 
 }

@@ -1,65 +1,70 @@
 import { BallDirection } from "./GameDefine";
 
-// Learn TypeScript:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/typescript.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class BallControl extends cc.Component {
 
-    @property speed: number = 1000;
+    speed: number = 750;
 
     @property({
         type: cc.Enum(BallDirection)
-    }) ballDirection: BallDirection;
+    }) ballDirection: BallDirection = BallDirection.TOP_LEFT;
     
-
     // onLoad () {}
     winSizeW: number = 0;
     winSizeH: number = 0;
+    dirX: number = 1;
+    dirY: number = 1;
     start () {
         this.winSizeW = cc.winSize.width;
         this.winSizeH = cc.winSize.height;
+        this.changeDirection(this.ballDirection);
     }
 
     update (dt) {
-        this.moveByDirection(dt, this.ballDirection);
+        var x = this.node.x;
+        var y = this.node.y;
+
+        x += this.dirX * this.speed * dt;
+        y += this.dirY * this.speed * dt;
+
+        var newPos = new cc.Vec2(x, y);
 
         // change direction if exeed canvas
         var changedDir = false;
-        if (this.node.x > this.winSizeW - this.node.width/2) {
-            this.dirX = -1;
+        if (newPos.x > this.winSizeW - (this.node.width/2)) {
+            //this.dirX = -1;
+            this.changeDirectionByCollistion(true);
             changedDir = true;
-        } else if (this.node.x < this.node.width/2) {
-            this.dirX = 1;
+        } else if (newPos.x < (this.node.width/2)) {
+            // this.dirX = 1;
+            this.changeDirectionByCollistion(true);
             changedDir = true;
-        }
-        if (this.node.y > this.winSizeH - this.node.height/2) {
-            this.dirY = -1;
+        } else if (newPos.y > this.winSizeH - (this.node.height/2)) {
+            // this.dirY = -1;
+            this.changeDirectionByCollistion(false);
             changedDir = true;
-        } else if (this.node.y < this.node.height/2) {
-            this.dirY = -1;
-            changedDir = true;
+        } else if (newPos.y < (this.node.height/2)) {
+            // this.dirY = 1;
+            //this.changeDirectionByCollistion(false);
+            //changedDir = true;
+            // TODO gameover
         }
 
         if (changedDir) {
-            this.node.x += this.dirX * this.speed * dt;
-            this.node.y += this.dirY * this.speed * dt;    
+            newPos = new cc.Vec2(this.node.x, this.node.y);
+            newPos.x += this.dirX * this.speed * dt;
+            newPos.y += this.dirY * this.speed * dt;    
         }
+
+        this.node.x = newPos.x;
+        this.node.y = newPos.y;
     }
 
-    dirX: number = 1;
-    dirY: number = 1;
-    moveByDirection(dt, ballDirection) {
-        switch(ballDirection) {
+    changeDirection(ballDirection) {
+        this.ballDirection = ballDirection;
+        switch(this.ballDirection) {
             case BallDirection.BOTTOM_LEFT:
                 this.dirX = -1;
                 this.dirY = -1;
@@ -77,7 +82,38 @@ export default class BallControl extends cc.Component {
                 this.dirY = 1;
                 break;
         }
-        this.node.x += this.dirX * this.speed * dt;
-        this.node.y += this.dirY * this.speed * dt;
+    }
+
+    changeDirectionByCollistion(isVerticalCollision: boolean) {
+        switch(this.ballDirection) {
+            case BallDirection.BOTTOM_LEFT:
+                if (isVerticalCollision) {
+                    this.changeDirection(BallDirection.BOTTOM_RIGHT);
+                } else {
+                    this.changeDirection(BallDirection.TOP_LEFT);
+                }                
+                break;
+            case BallDirection.BOTTOM_RIGHT:
+                if (isVerticalCollision) {
+                    this.changeDirection(BallDirection.BOTTOM_LEFT);
+                } else {
+                    this.changeDirection(BallDirection.TOP_RIGHT);
+                }
+                break;
+            case BallDirection.TOP_LEFT:
+                if (isVerticalCollision) {
+                    this.changeDirection(BallDirection.TOP_RIGHT);
+                } else {
+                    this.changeDirection(BallDirection.BOTTOM_LEFT);
+                }
+                break;
+            case BallDirection.TOP_RIGHT:
+                if (isVerticalCollision) {
+                    this.changeDirection(BallDirection.TOP_LEFT);
+                } else {
+                    this.changeDirection(BallDirection.BOTTOM_RIGHT);
+                }
+                break;
+        }
     }
 }

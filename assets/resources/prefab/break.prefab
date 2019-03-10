@@ -13,12 +13,12 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "ball",
+    "_name": "break",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
     "_active": true,
-    "_level": 1,
+    "_level": 2,
     "_components": [
       {
         "__id__": 2
@@ -43,8 +43,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 820,
-      "height": 899
+      "width": 80,
+      "height": 27
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -53,14 +53,14 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 113,
-      "y": 152,
+      "x": -36,
+      "y": 176,
       "z": 0
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.2,
-      "y": 0.2,
+      "x": 1,
+      "y": 1,
       "z": 1
     },
     "_quat": {
@@ -88,7 +88,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "5bb01211-f6c2-44fc-aaf8-23431f2faa5f"
+      "__uuid__": "879a942a-df2b-4188-bf3c-6e31629a31a2"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -106,19 +106,7 @@
     "_id": ""
   },
   {
-    "__type__": "43e20gqFgBFX6CeQ66vimoP",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "speed": 0,
-    "moveUp": 0,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CircleCollider",
+    "__type__": "cc.BoxCollider",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -131,7 +119,21 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 400,
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 80,
+      "height": 27
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "6a391D6ERtGXLViGTwWymV1",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
     "_id": ""
   },
   {
@@ -140,9 +142,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "7ab8876e-fe6c-49e9-b0e6-c316d1d94eec"
+      "__id__": 0
     },
-    "fileId": "7eOiQzUyZFPIos3i0UKauT",
+    "fileId": "77fo8o3zZNh5Tf0SMzm/w1",
     "sync": false
   }
 ]

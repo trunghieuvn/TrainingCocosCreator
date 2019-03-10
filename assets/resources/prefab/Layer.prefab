@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "ball",
+    "_name": "Level",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -22,16 +22,10 @@
     "_components": [
       {
         "__id__": 2
-      },
-      {
-        "__id__": 3
-      },
-      {
-        "__id__": 4
       }
     ],
     "_prefab": {
-      "__id__": 5
+      "__id__": 3
     },
     "_opacity": 255,
     "_color": {
@@ -43,8 +37,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 820,
-      "height": 899
+      "width": 0,
+      "height": 0
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -53,14 +47,14 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 113,
-      "y": 152,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.2,
-      "y": 0.2,
+      "x": 1,
+      "y": 1,
       "z": 1
     },
     "_quat": {
@@ -78,60 +72,20 @@
     "_id": ""
   },
   {
-    "__type__": "cc.Sprite",
+    "__type__": "9133buACBtAzKtBk9mn1PVV",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "5bb01211-f6c2-44fc-aaf8-23431f2faa5f"
+    "levelNode": null,
+    "brickLevel1": {
+      "__uuid__": "79097ce1-8d13-4fb4-ad8a-669d69f25caa"
     },
-    "_type": 0,
-    "_sizeMode": 1,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_state": 0,
-    "_atlas": null,
-    "_id": ""
-  },
-  {
-    "__type__": "43e20gqFgBFX6CeQ66vimoP",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "speed": 0,
-    "moveUp": 0,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CircleCollider",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "tag": 0,
-    "_offset": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_radius": 400,
+    "numRows": 2,
+    "numBrickPerRow": 4,
+    "padding": 10,
     "_id": ""
   },
   {
@@ -140,9 +94,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "7ab8876e-fe6c-49e9-b0e6-c316d1d94eec"
+      "__uuid__": "b229fae6-b1b7-46cd-8217-a3ab1e1f7a2d"
     },
-    "fileId": "7eOiQzUyZFPIos3i0UKauT",
+    "fileId": "c4EM7f0fVP26gLdv9kphnA",
     "sync": false
   }
 ]
