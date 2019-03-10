@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "pokemon",
+    "_name": "totalNumber",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -25,13 +25,10 @@
       },
       {
         "__id__": 3
-      },
-      {
-        "__id__": 4
       }
     ],
     "_prefab": {
-      "__id__": 5
+      "__id__": 4
     },
     "_opacity": 255,
     "_color": {
@@ -43,8 +40,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
-      "height": 50
+      "width": 22.25,
+      "height": 40
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -53,8 +50,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 134,
-      "y": 210,
+      "x": 600,
+      "y": 45,
       "z": 0
     },
     "_scale": {
@@ -75,34 +72,33 @@
     "_zIndex": 0,
     "_is3DNode": false,
     "groupIndex": 0,
+    "_rotationX": 0,
+    "_rotationY": 0,
     "_id": ""
   },
   {
-    "__type__": "cc.Sprite",
-    "_name": "pokemon<Sprite>",
+    "__type__": "cc.Label",
+    "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
+    "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "a06b26c3-05dd-477c-88a7-6ae736a2b1a2"
-    },
-    "_type": 0,
-    "_sizeMode": 0,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_state": 0,
-    "_atlas": null,
+    "_useOriginalSize": false,
+    "_string": "0",
+    "_N$string": "0",
+    "_fontSize": 40,
+    "_lineHeight": 40,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_N$horizontalAlign": 1,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0,
     "_id": ""
   },
   {
@@ -119,31 +115,14 @@
     "_id": ""
   },
   {
-    "__type__": "cc.CircleCollider",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "tag": 0,
-    "_offset": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_radius": 25,
-    "_id": ""
-  },
-  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "6dfcabf2-5103-45e7-a3db-912bd11a674b"
+      "__id__": 0
     },
-    "fileId": "e525tjdX1AXL6Bxz06LZow",
+    "fileId": "207+yYGahDSaivvvpbXZCr",
     "sync": false
   }
 ]
