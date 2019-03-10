@@ -17,32 +17,32 @@ export default class GameController extends cc.Component {
 
     @property(cc.Prefab) ball_prefab : cc.Prefab = null;
 
+    @property(cc.Label) count : cc.Label = null;
+
+    nodeBall : cc.Node = null;
+
     onLoad () {
-        for(var i = 0 ; i< 3; i++){
-            var obj_ball = cc.instantiate(this.ball_prefab);
-            obj_ball.x = -900 + 300 * i;
-            this.node.addChild(obj_ball);
-        }
-
-        for(var i = 0 ; i< 3; i++){
-            //khoi tao node
-            var obj_ball = cc.instantiate(this.ball_prefab);
-            //get  component trong node
-            var ball = obj_ball.getComponent(BallController);
-            ball.speed = -100;
-
-            obj_ball.x = -900 + 300 * i;
-
-            //add node vao node khac
-            this.node.addChild(obj_ball);
-        }
+        
+        
     }
 
     start () {
+        this.nodeBall = cc.instantiate(this.ball_prefab);
+        this.nodeBall.x = 380 ;
+        this.nodeBall.y = 500;
 
+        var ball = this.nodeBall.getComponent(BallController);
+        ball.dir *= -1;
+
+        this.node.addChild(this.nodeBall);
     }
 
     update (dt) {
-        
+        var ss = this.nodeBall.getComponent(BallController).sovacham;
+        this.count.string = ss.toString();
+    }
+
+    onCollisionEnter(other, self) {
+        cc.log("ansbdjnsbdfhjbsdhjbfhjsbdfhjbsdhjfbhjb");
     }
 }

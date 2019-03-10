@@ -14,9 +14,13 @@ const {ccclass, property} = cc._decorator;
 export class BallController extends cc.Component {
 
     @property speed : number = 100;
+    @property dir : number = 1;
+
+    sovacham : number = 0 ;
 
     onLoad () {
-        cc.log("Ball speed : " + this.speed);
+        cc.director.getCollisionManager().enabled = true;
+
     }
 
     start () {
@@ -24,6 +28,18 @@ export class BallController extends cc.Component {
     }
 
     update (dt) {
-        this.node.y += this.speed * dt;
+        this.node.y += this.speed * this.dir * dt;
     }
+
+
+    onCollisionEnter(other, self) {
+        cc.log("Ball onCollisionEnter");
+        this.dir *= -1 ;
+        this.sovacham += 2;
+    }
+
+    getVacham(){
+        return this.sovacham;
+    }
+
 }
