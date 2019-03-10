@@ -9,6 +9,8 @@ export default class GameWorldController extends cc.Component {
     @property(cc.Canvas) canvas : cc.Canvas = null;
     @property (cc.Node) GuiManager : cc.Node = null;
 
+    @property(cc.Prefab) gameSetting : cc.Prefab = null;
+    
     state : GameState;
     layer_MainMenu : cc.Node;
     layer_Game : cc.Node;
