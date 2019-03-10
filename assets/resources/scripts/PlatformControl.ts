@@ -13,15 +13,10 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class PlatformControl extends cc.Component {
 
-    @property(cc.Label)
-    label: cc.Label = null;
 
-    @property
-    text: string = 'hello';
-
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {}
+    onLoad () {
+        cc.director.getCollisionManager().enabled;
+    }
 
     start () {
 
