@@ -67,6 +67,9 @@ export default class GameWorld extends cc.Component {
             y = Math.random() * 100 + 400 + this.tailTower.y;
 
             newTower = this.createTower(x, y);
+
+            // flip tower
+            newTower.scaleX = x < 0? 1 : -1;
         }
         this.headTower = this.tailTower;
         this.tailTower = newTower;
