@@ -21,6 +21,9 @@ export default class GameController extends cc.Component {
 
     nodeBall : cc.Node = null;
 
+    
+    
+
     onLoad () {
         
         
@@ -34,15 +37,20 @@ export default class GameController extends cc.Component {
         var ball = this.nodeBall.getComponent(BallController);
         ball.dir *= -1;
 
+
+        ball.callbackCollider = this.GameOVer.bind(this);
+
         this.node.addChild(this.nodeBall);
     }
 
     update (dt) {
-        var ss = this.nodeBall.getComponent(BallController).sovacham;
+        //var ss = this.nodeBall.getComponent(BallController).sovacham;
+        //this.count.string = ss.toString();
+    }
+
+    
+    GameOVer(ss) {
         this.count.string = ss.toString();
     }
 
-    onCollisionEnter(other, self) {
-        cc.log("ansbdjnsbdfhjbsdhjbfhjsbdfhjbsdhjfbhjb");
-    }
 }

@@ -18,6 +18,8 @@ export class BallController extends cc.Component {
 
     sovacham : number = 0 ;
 
+    callbackCollider : (ss) => void = null; 
+
     onLoad () {
         cc.director.getCollisionManager().enabled = true;
 
@@ -36,10 +38,11 @@ export class BallController extends cc.Component {
         cc.log("Ball onCollisionEnter");
         this.dir *= -1 ;
         this.sovacham += 2;
-    }
 
-    getVacham(){
-        return this.sovacham;
+        if(this.callbackCollider != null) 
+        {
+            this.callbackCollider(this.sovacham);
+        }
     }
 
 }
