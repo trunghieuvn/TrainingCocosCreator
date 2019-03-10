@@ -30,7 +30,7 @@ export default class GameController extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.label.string = 'xin chao 1'; 
+        //this.label.string = 'xin chao 1'; 
     }
 
     touchEnd(customerData : cc.Event.EventCustom) {
@@ -38,8 +38,7 @@ export default class GameController extends cc.Component {
     }
 
     countTouch() {
-        //cc.log('count touch');
-        this.label.string = 'xin chao'; 
+        this.label.string += 1 ;
     }
 
     start () {
