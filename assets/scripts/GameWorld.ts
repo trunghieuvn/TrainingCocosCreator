@@ -9,8 +9,9 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
 const {ccclass, property} = cc._decorator;
-import CameraControl from './CameraControl';
 import Player from './Player';
+import Tower, {BridgeState} from './Tower';
+
 
 
 @ccclass
@@ -28,10 +29,10 @@ export default class GameWorld extends cc.Component {
     onLoad () {
         // init event touch listener
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart.bind(this));
+        this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd.bind(this));
     }
 
     start () {
-        this.spawnTower();
         this.spawnTower();
     }
 
@@ -69,9 +70,17 @@ export default class GameWorld extends cc.Component {
         }
         this.headTower = this.tailTower;
         this.tailTower = newTower;
+        this.tailTower.zIndex = this.headTower.zIndex - 1;
     }
 
     public onTouchStart (touch: cc.Event.EventTouch) {
+        this.headTower.getComponent(Tower).bridgeState = BridgeState.Bridging;
+        this.headTower.getComponent(Tower).vector = new cc.Vec2(this.tailTower.x - this.headTower.x, this.tailTower.y - this.headTower.y);
+    }
+
+    public onTouchEnd (touch: cc.Event.EventTouch) {
+        this.headTower.getComponent(Tower).bridgeState = BridgeState.Bridge;
+
         let worldPos = this.tailTower.convertToWorldSpaceAR(this.tailTower.getChildByName('Top').position);
         let nodePos = this.node.convertToNodeSpaceAR(worldPos);
         this.player.getComponent(Player).move(nodePos.x, nodePos.y);
