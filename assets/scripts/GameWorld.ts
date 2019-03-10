@@ -20,7 +20,10 @@ export default class GameWorld extends cc.Component {
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
+    onLoad () {
+        // init event touch listener
+        this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart.bind(this));
+    }
 
     start () {
         this.spawnTower();
@@ -29,7 +32,7 @@ export default class GameWorld extends cc.Component {
     // update (dt) {}
 
     // =========================== Methods =================================
-    public createTower (x: number, y:number) :cc.Node {
+    private createTower (x: number, y:number) :cc.Node {
         let tower = cc.instantiate(this.prefTower);
         tower.x = x;
         tower.y = y;
@@ -37,7 +40,7 @@ export default class GameWorld extends cc.Component {
         return tower;
     }
 
-    public spawnTower () {
+    private spawnTower () {
         // random position
         let newTower: cc.Node = null;
         let x, y;
@@ -50,11 +53,15 @@ export default class GameWorld extends cc.Component {
             } else {
                 x = Math.random() * -50 - 150;
             }
-            y = Math.random() * 50 + 500;
+            y = Math.random() * 100 + 400 + this.tailTower.y;
 
             newTower = this.createTower(x, y);
         }
         this.headTower = this.tailTower;
         this.tailTower = newTower;
+    }
+
+    public onTouchStart (touch: cc.Event.EventTouch) {
+        this.spawnTower();
     }
 }
