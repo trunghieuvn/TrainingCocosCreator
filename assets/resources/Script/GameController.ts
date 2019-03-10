@@ -10,6 +10,7 @@ export default class GameController extends cc.Component {
 
     state: GameState;
     menu: cc.Node;
+    level: cc.Node;
 
     onLoad() {
         this.state = GameState.None;
@@ -17,6 +18,7 @@ export default class GameController extends cc.Component {
 
     start() {
         this.menu = this.UI.getChildByName("Menu");
+        this.level = this.UI.getChildByName("Level1");
         this.init();
     }
 
@@ -39,6 +41,7 @@ export default class GameController extends cc.Component {
 
     init() {
         this.menu.active = true;
+        this.level.active = false;
         this.state = GameState.MainMenuGame;
     }
 
@@ -47,6 +50,7 @@ export default class GameController extends cc.Component {
         cc.log("btnPLAY");
         this.state = GameState.InGame;
         this.menu.active = false;
+        this.level.active = true;
 
     }
 
