@@ -44,9 +44,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.8166666666666667,
-      "y": 0.8166666666666667,
-      "z": 0.8166666666666667
+      "x": 0.6216058150272447,
+      "y": 0.6216058150272447,
+      "z": 0.6216058150272447
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -425,6 +425,7 @@
       "__id__": 10
     },
     "text": "hello",
+    "count": 0,
     "canvas": null,
     "ball_prefab": {
       "__uuid__": "3ae9df77-06f5-45dd-ac86-4442d0cbd465"
@@ -442,8 +443,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "0",
-    "_N$string": "0",
+    "_string": "Va chạm: 0",
+    "_N$string": "Va chạm: 0",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -482,7 +483,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 22.25,
+      "width": 199.36,
       "height": 40
     },
     "_anchorPoint": {
@@ -700,6 +701,7 @@
     "_enabled": true,
     "speed": 100,
     "dir": 1,
+    "count": 0,
     "_id": "1euazsRfFDVbpzrB+XWgJN"
   },
   {

@@ -19,7 +19,10 @@ export default class GameController extends cc.Component {
     label: cc.Label = null;
 
     @property
-    text: string = 'hello';
+    text: string = 'Va chạm:';
+
+    @property count : number = 0;
+
 
 
 
@@ -38,7 +41,7 @@ export default class GameController extends cc.Component {
     }
 
     countTouch() {
-        this.label.string += 1 ;
+        this.label.string = 'Va chạm:' + (this.count+ 1);
     }
 
     start () {
