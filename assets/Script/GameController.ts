@@ -13,26 +13,43 @@ import BallControll from './BallControll';
 
 @ccclass
 export default class GameController extends cc.Component {
-
     
     @property(cc.Prefab) ball_prefab: cc.Prefab = null;
+
+    @property(cc.Label) label: cc.Label = null;
+
+    @property text: string = 'hello';
+
+    @property totalCount : number = 0;
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        
+    }
+
+    setTotal() {
+        cc.log("total:" + this.totalCount);
+        // this.label.string = "Count: " + text;
+    }
+
+    start () {
         for(var i = 0; i < 3; i++) {
             var ball_obj = cc.instantiate(this.ball_prefab);
             ball_obj.x = -200 + 200 * i;
             var ball = ball_obj.getComponent(BallControll);
+            ball.setCallBackController(this.setTotal.bind(this));
             if(i % 2 == 0)
+
                 ball.changeDir();
             this.node.addChild(ball_obj); 
+            this.totalCount += ball.count;
         }
     }
 
-    start () {
+    update (dt) {
+        
 
+        // this.label.string = "Count: " + this.totalCount;
     }
-
-    // update (dt) {}
 }

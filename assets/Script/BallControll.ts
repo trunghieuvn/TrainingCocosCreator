@@ -15,16 +15,43 @@ export default class BallControll extends cc.Component {
 
     @property speed : number = 100;
     @property dir: number = 1;
+    @property count: number = 0;
+    callBackController: () => void = null;
+
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
         cc.log("ssss");
+        cc.director.getCollisionManager().enabled = true;
     }
 
     update (dt) {
         this.node.y += this.dir * this.speed * dt;
+        if( this.node.y > 500 ||  this.node.y < -500){
+            this.changeDir();
+        }
+    }
+
+    setCallBackController(callback) {
+        this.callBackController = callback;
     }
 
     changeDir() {
         this.dir *= -1;
+        // cc.log(this.count);
+    }
+
+    onCollisionEnter(other, self) {
+        cc.log("Ball onCollisionEnter");
+        this.changeDir();
+        this.count += 1;
+        // cc.log(this.callBackController);
+    }
+
+    onCollisionExit(other, self) {
+        cc.log("Ball onCollisionExit");
+    }
+
+    onCollisionStay(other, self) {
+        cc.log("Ball onCollisionStay");
     }
 }
