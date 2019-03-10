@@ -10,36 +10,22 @@
 
 const {ccclass, property} = cc._decorator;
 
-// import BallControll from './ballcontroll';
-
 @ccclass
-export default class BallControler extends cc.Component {
+export default class NewClass extends cc.Component {
 
-    // @property(cc.Label)
-    // label: cc.Label = null;
-    @property(cc.Prefab) ball : cc.Prefab = null;
+    @property(cc.Label)
+    label: cc.Label = null;
 
     @property
     text: string = 'hello';
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
-        for(var i = 0; i < 3; i++) {
-            var obj_ball = cc.instantiate(this.ball);
-            obj_ball.x = 100 * i;
-            this.node.addChild(obj_ball);
-        }
-    }
+    // onLoad () {}
 
     start () {
 
     }
 
-    
-    update (dt) {
-        
-        
-    }
-
+    // update (dt) {}
 }
