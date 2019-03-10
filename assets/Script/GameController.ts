@@ -1,55 +1,65 @@
-// Learn TypeScript:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/typescript.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
+import {GameState} from "./GameDefine";
 const {ccclass, property} = cc._decorator;
-import BallControll from './BallControll';
 
 @ccclass
-export default class GameController extends cc.Component {
-    
-    @property(cc.Prefab) ball_prefab: cc.Prefab = null;
+export default class GameWorldController extends cc.Component {
 
-    @property(cc.Label) label: cc.Label = null;
+    @property (cc.Node) GuiManager : cc.Node = null;
 
-    @property text: string = 'hello';
+    state : GameState;
+    layer_MainMenu : cc.Node;
+    layer_StartGame : cc.Node;
+    layer_InGame : cc.Node;
+    layer_EndGame : cc.Node;
 
-    @property totalCount : number = 0;
 
     // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
-        
-    }
+        this.state = GameState.None;
 
-    setTotal() {
-        cc.log("total:" + this.totalCount);
-        // this.label.string = "Count: " + text;
     }
 
     start () {
-        for(var i = 0; i < 3; i++) {
-            var ball_obj = cc.instantiate(this.ball_prefab);
-            ball_obj.x = -200 + 200 * i;
-            var ball = ball_obj.getComponent(BallControll);
-            ball.setCallBackController(this.setTotal.bind(this));
-            if(i % 2 == 0)
-
-                ball.changeDir();
-            this.node.addChild(ball_obj); 
-            this.totalCount += ball.count;
-        }
+        this.layer_MainMenu = this.GuiManager.getChildByName("MainMenu");
+        this.layer_StartGame = this.node.getChildByName("StartGame");
+        this.layer_InGame = this.node.getChildByName("InGame");
+        this.layer_EndGame = this.node.getChildByName("EndGame");
+        this.init ();
     }
 
     update (dt) {
-        
-
-        // this.label.string = "Count: " + this.totalCount;
+        switch(this.state) {
+            case GameState.MainMenuGame: {
+                // code effect for main menu 
+                cc.log("MAIN MENU ......");
+                break;
+            }
+            case GameState.InGame: {
+                /// code logic game update component in game 
+                cc.log("IN GAME ......");
+                this.layer_StartGame.active = false;
+                this.layer_InGame.active = true;
+                break;
+            }
+            case GameState.EndGame: {
+                break;
+            }
+        }
     }
+
+    init() {
+        this.layer_MainMenu.active = true;  
+        this.state = GameState.MainMenuGame;
+        this.layer_StartGame.active = true;
+        this.layer_StartGame.active = false;
+        this.layer_StartGame.active = false;
+    }
+
+     /// GUI 
+    btnPlay() {
+        cc.log("btnPLAY");
+        this.state = GameState.InGame;
+        this.layer_MainMenu.active = false;
+
+     }
 }
