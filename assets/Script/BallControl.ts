@@ -13,7 +13,39 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class BallControl extends cc.Component {
 
-    // onLoad () {}
+    onLoad () {
+        cc.director.getCollisionManager().enabled = true;
+    }
+
+    callbackCollider : (text) => void = null; 
+
+    isEnter: boolean = false;
+    counter: number = 0;
+    onCollisionEnter(other, self) {
+        this.counter++;
+        this.isEnter = true;
+
+        if(this.callbackCollider != null) {
+            this.callbackCollider("Đụng mày nè: " + this.counter);
+        }
+    }
+
+    setCallbackCollider(_callback){
+        this.callbackCollider = _callback;
+    }
+
+    onCollisionStay(other, self) {
+        this.isEnter = false;
+        // cc.log('on collision stay')
+    }
+
+    onCollisionExit(other, self){
+        // cc.log('on collision exit')
+    }
+
+    getCounter(){
+        return this.counter;
+    }
 
     @property dir: number = 1;
     @property speed : number = 100;
@@ -28,5 +60,12 @@ export default class BallControl extends cc.Component {
 
     update (dt) {
         this.node.y += this.dir * this.speed * dt;
+        if(this.node.y > 500 || this.node.y < -500 || this.isEnter){
+            this.changeDir();
+        }
+        
+        if(this.isEnter){
+            // this.gameCtrl.changeLabel("Đụng mày nè: " + this.counter);
+        }
     }
 }

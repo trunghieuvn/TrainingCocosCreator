@@ -15,24 +15,29 @@ import BallControl from "./BallControl";
 export default class GameController extends cc.Component {
 
     @property(cc.Prefab) ball_prefab: cc.Prefab = null;
+    @property(cc.Label) label: cc.Label = null;
 
     // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
-        for (let index = 0; index < 3; index++) {
-            
-            var obj_ball = cc.instantiate(this.ball_prefab);
-            obj_ball.x = -290 + (200*index);
-            if(index%2 ==0){
-                var ball = obj_ball.getComponent(BallControl);
-                ball.changeDir();
-            }
-            this.node.addChild(obj_ball);
-        }
-        
+        // this.node.getComponent
     }
 
     start () {
 
+        var selt = this;
+        for (let index = 0; index < 3; index++) {
+            
+            var obj_ball = cc.instantiate(this.ball_prefab);
+            obj_ball.x = -200 + (200*index);
+            var ball = obj_ball.getComponent(BallControl);
+            ball.setCallbackCollider(function(text){
+                selt.label.string = text;
+            });
+            if(index%2 ==0){
+                
+                ball.changeDir();
+            }
+            this.node.addChild(obj_ball);
+        }
     }
 }
