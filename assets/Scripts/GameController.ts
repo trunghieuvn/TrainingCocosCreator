@@ -30,6 +30,20 @@ export default class GameController extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        this.label.string = 'xin chao 1'; 
+    }
+
+    touchEnd(customerData : cc.Event.EventCustom) {
+
+    }
+
+    countTouch() {
+        //cc.log('count touch');
+        this.label.string = 'xin chao'; 
+    }
+
+    start () {
+
         //this.canvas.node.on(cc.Node.EventType.TOUCH_END,this.touchEnd.bind(this));
         for(var i =0; i < 2; i++) {
             var obj_ball = cc.instantiate(this.ball_prefab);
@@ -40,18 +54,6 @@ export default class GameController extends cc.Component {
             this.node.addChild(obj_ball);
             ball.callbackCollider = this.countTouch.bind(this);
         }
-    }
-
-    touchEnd(customerData : cc.Event.EventCustom) {
-
-    }
-
-    countTouch() {
-        cc.log("count Touch");
-    }
-
-    start () {
-
     }
 
     // update (dt) {}
