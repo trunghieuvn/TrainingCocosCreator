@@ -12,7 +12,8 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class Player extends cc.Component {
-
+    // ========================= Members ==============================
+    public isMoving: boolean = false;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -29,9 +30,11 @@ export default class Player extends cc.Component {
         let actionMoveTo = cc.moveTo(1, x, y);
         let actionFlip = cc.callFunc(() => {
             this.node.scaleX *= -1;
+            this.isMoving = false;
         });
         let sequence = cc.sequence(actionMoveTo, actionFlip);
 
+        this.isMoving = true;
         this.node.runAction(sequence);
     }
 }

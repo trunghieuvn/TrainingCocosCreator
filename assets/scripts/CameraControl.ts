@@ -9,12 +9,15 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
 const {ccclass, property} = cc._decorator;
+import Player from './Player';
 
 @ccclass
 export default class CameraControl extends cc.Component {
+    // ====================== Properties ======================
+    @property(cc.Node) player: cc.Node = null;
+
     // ====================== Members ==========================
-    public target: cc.Node = null;
-    private isMoved: boolean = false;
+    private isMoving: boolean = false;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -24,15 +27,23 @@ export default class CameraControl extends cc.Component {
 
     }
 
-    // update (dt) {}
+    update (dt) {
+        this.moveUp();
+    }
 
     // ======================= Methods ==========================
     public moveUp () {
-        if (!this.target) {
-            return;
-        }
+        if (this.isMoving) return;
+        if (!this.player) return;
+        if (this.player.getComponent(Player).isMoving) return;
+        if (this.player.y <= this.node.y - 300) return;
 
-        let actionMoveTo = cc.moveTo(0.5, new cc.Vec2(0, this.target.y + 300));
-        this.node.runAction(actionMoveTo);
+        let actionMoveTo = cc.moveTo(0.5, new cc.Vec2(0, this.player.y + 300));
+        let moveEnd = cc.callFunc(() => {
+            this.isMoving = false;
+        });
+
+        this.isMoving = true;
+        this.node.runAction(cc.sequence(actionMoveTo, moveEnd));
     }
 }
