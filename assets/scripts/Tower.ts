@@ -13,7 +13,8 @@ const {ccclass, property} = cc._decorator;
 export enum BridgeState {
     None,
     Bridging,
-    Bridge
+    Bridge,
+    Finish
 }
 
 @ccclass
@@ -59,7 +60,10 @@ export default class Tower extends cc.Component {
         let actionRotateBy = cc.rotateBy(1, -angle);
         let actionSkewBy = cc.skewBy(1, 0, angle);
         let spawn = cc.spawn(actionRotateBy, actionSkewBy);
+        let finish = cc.callFunc(() => {
+
+        });
         this._bridge.runAction(spawn);
-        this.bridgeState = BridgeState.None;
+        this.bridgeState = BridgeState.Finish;
     }
 }

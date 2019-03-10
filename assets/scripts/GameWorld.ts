@@ -64,7 +64,7 @@ export default class GameWorld extends cc.Component {
             } else {
                 x = Math.random() * -50 - 150;
             }
-            y = Math.random() * 100 + 400 + this.tailTower.y;
+            y = Math.random() * 100 + 200 + this.tailTower.y;
 
             newTower = this.createTower(x, y);
 
@@ -77,15 +77,23 @@ export default class GameWorld extends cc.Component {
     }
 
     public onTouchStart (touch: cc.Event.EventTouch) {
-        this.headTower.getComponent(Tower).bridgeState = BridgeState.Bridging;
-        this.headTower.getComponent(Tower).vector = new cc.Vec2(this.tailTower.x - this.headTower.x, this.tailTower.y - this.headTower.y);
+        let headTowerComponent = this.headTower.getComponent(Tower);
+        if (headTowerComponent.bridgeState === BridgeState.None) {
+            headTowerComponent.bridgeState = BridgeState.Bridging;
+            headTowerComponent.vector = new cc.Vec2(this.tailTower.x - this.headTower.x, this.tailTower.y - this.headTower.y);
+        }
     }
 
     public onTouchEnd (touch: cc.Event.EventTouch) {
-        this.headTower.getComponent(Tower).bridgeState = BridgeState.Bridge;
+        if (this.headTower.getComponent(Tower).bridgeState === BridgeState.Bridging) {
+            this.headTower.getComponent(Tower).bridgeState = BridgeState.Bridge;
 
-        let worldPos = this.tailTower.convertToWorldSpaceAR(this.tailTower.getChildByName('Top').position);
-        let nodePos = this.node.convertToNodeSpaceAR(worldPos);
-        this.player.getComponent(Player).move(nodePos.x, nodePos.y);
+            let worldPos = this.tailTower.convertToWorldSpaceAR(this.tailTower.getChildByName('Top').position);
+            let nodePos = this.node.convertToNodeSpaceAR(worldPos);
+    
+            this.scheduleOnce(() => {
+                this.player.getComponent(Player).move(nodePos.x, nodePos.y);
+            }, 1);
+        }
     }
 }
