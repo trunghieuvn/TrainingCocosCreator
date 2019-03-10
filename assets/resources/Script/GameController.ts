@@ -1,11 +1,6 @@
 const { ccclass, property } = cc._decorator;
 
-enum GameState { 
-    None,
-    MainMenuGame,
-    InGame, 
-    EndGame
-}
+import { GameState, BallDirection } from './GameConfig';
 
 @ccclass
 export default class GameController extends cc.Component {
@@ -13,8 +8,8 @@ export default class GameController extends cc.Component {
     @property(cc.Node)
     UI: cc.Node = null;
 
-    state : GameState;
-    menu : cc.Node;
+    state: GameState;
+    menu: cc.Node;
 
     onLoad() {
         this.state = GameState.None;
@@ -22,15 +17,28 @@ export default class GameController extends cc.Component {
 
     start() {
         this.menu = this.UI.getChildByName("Menu");
-        this.init ();
+        this.init();
     }
 
     update(dt) {
-
+        switch (this.state) {
+            case GameState.None:
+                cc.log("None case")
+                break;
+            case GameState.MainMenuGame:
+                cc.log("Main menu case");
+                break;
+            case GameState.InGame:
+                cc.log("In game case");
+                break;
+            case GameState.EndGame:
+                cc.log("End game case");
+                break;
+        }
     }
 
     init() {
-        this.menu.active = true;  
+        this.menu.active = true;
         this.state = GameState.MainMenuGame;
     }
 
