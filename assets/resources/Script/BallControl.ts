@@ -6,19 +6,22 @@ import { GameState, BallDirection } from './GameConfig';
 export default class BallControl extends cc.Component {
 
     @property
-    speed: number = 1000;
+    speed: number = 100;
 
     isMoving: boolean = true;
 
     dir: BallDirection = null;
 
     onLoad() {
-
+        cc.director.getCollisionManager().enabled = true;
     }
 
     start() {
-        
         this.dir = BallDirection.RIGHT_TOP;
+    }
+
+    onCollisionEnter(other, self) {
+        cc.log("Va cham ...........");
     }
 
     update(dt) {
