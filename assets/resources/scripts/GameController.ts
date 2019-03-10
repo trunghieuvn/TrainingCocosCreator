@@ -18,6 +18,7 @@ export default class GameWorldController extends cc.Component {
 
     state : GameState;
     layer_MainMenu : cc.Node;
+    layer_InGame: cc.Node;
 
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
@@ -26,8 +27,9 @@ export default class GameWorldController extends cc.Component {
     }
 
     start () {
+        
         this.layer_MainMenu = this.GuiManager.getChildByName("MainMenu");
-
+        this.layer_InGame = this.GuiManager.getChildByName("InGame");
         this.init ();
     }
 
@@ -60,6 +62,7 @@ export default class GameWorldController extends cc.Component {
         cc.log("btnPLAY");
         this.state = GameState.InGame;
         this.layer_MainMenu.active = false;
+        this.layer_InGame.active = true;
 
      }
 }
