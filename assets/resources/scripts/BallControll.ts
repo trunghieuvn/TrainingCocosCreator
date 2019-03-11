@@ -19,9 +19,14 @@ export default class BallControll extends cc.Component {
     state : BallState = BallState.MOVING;
 
     // Define delegate 
-    delegate : BallDelegate;
-    setDelegate(deleg) {
-        this.delegate = deleg;
+    delegates : Array<BallDelegate> = [];
+    addDelegate(deleg) {
+        this.delegates.push(deleg);
+    }
+    notiDelegate_OnDie() {
+        this.delegates.forEach(delegate => {
+            delegate.OnDie();
+        });
     }
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
@@ -89,8 +94,8 @@ export default class BallControll extends cc.Component {
         if(this.node.y < this.node.getContentSize().height / 2) {
             cc.log("is die");
             this.state = BallState.DIE;
-            if(this.delegate != null)
-                this.delegate.OnDie();
+
+            this.notiDelegate_OnDie();
             
         }
 

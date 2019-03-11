@@ -33,7 +33,7 @@ export default class GameWorldController extends cc.Component implements BallDel
         this.canvas.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove.bind(this));
         cc.find("Canvas/GameWorld/Game/ball")
         .getComponent(BallControll)
-        .setDelegate(this);
+        .addDelegate(this);
         
     }
     onTouchMove(event) {
