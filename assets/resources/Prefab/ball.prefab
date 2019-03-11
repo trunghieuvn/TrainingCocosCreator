@@ -13,12 +13,12 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "bar",
+    "_name": "ball",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
     "_active": true,
-    "_level": 4,
+    "_level": 1,
     "_components": [
       {
         "__id__": 2
@@ -28,10 +28,13 @@
       },
       {
         "__id__": 4
+      },
+      {
+        "__id__": 5
       }
     ],
     "_prefab": {
-      "__id__": 5
+      "__id__": 6
     },
     "_opacity": 255,
     "_color": {
@@ -43,8 +46,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 384,
-      "height": 128
+      "width": 60,
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -59,9 +62,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.52,
-      "y": 0.27,
-      "z": 0.52
+      "x": 1,
+      "y": 1,
+      "z": 1
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -79,7 +82,7 @@
   },
   {
     "__type__": "cc.Sprite",
-    "_name": "bar<Sprite>",
+    "_name": "hinhtron<Sprite>",
     "_objFlags": 0,
     "node": {
       "__id__": 1
@@ -88,10 +91,10 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "4afc7cd6-c586-43e7-b53d-a05a2030718d"
+      "__uuid__": "79a8d4ca-b9ae-4727-a211-1e5a4b28ea61"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -102,9 +105,20 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_state": 0,
-    "_atlas": {
-      "__uuid__": "15cd6042-aa74-4e8b-804e-3ee8c3966dff"
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "15e39hmvtZKNJBzyt56FWIo",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
     },
+    "_enabled": true,
+    "speed": 100,
+    "isMoving": true,
+    "dir": 0,
     "_id": ""
   },
   {
@@ -132,7 +146,7 @@
     "_id": ""
   },
   {
-    "__type__": "cc.PhysicsBoxCollider",
+    "__type__": "cc.PhysicsCircleCollider",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -150,11 +164,7 @@
       "x": 0,
       "y": 0
     },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 384,
-      "height": 128
-    },
+    "_radius": 30,
     "_id": ""
   },
   {
@@ -163,9 +173,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "db9fc7c5-fe08-4c5b-9726-7f2b02b80a72"
+      "__uuid__": "674bf5ef-6b32-4db9-b947-4f3e0ba32d81"
     },
-    "fileId": "cbWsb1YpVEu4BxxvTpaY5w",
+    "fileId": "8d+/2q7udKdJk2d+WspAkp",
     "sync": false
   }
 ]
