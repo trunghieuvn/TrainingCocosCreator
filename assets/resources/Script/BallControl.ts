@@ -1,6 +1,7 @@
 const { ccclass, property } = cc._decorator;
 
 import { GameState, BallDirection, BallDelegate } from './GameConfig';
+import GameSetting from './GameSetting';
 
 @ccclass
 export default class BallControl extends cc.Component {
@@ -11,6 +12,9 @@ export default class BallControl extends cc.Component {
     isMoving: boolean = true;
 
     dir: BallDirection = null;
+
+
+    @property(cc.Prefab) gameSetting : cc.Prefab = null;
 
     delegate : BallDelegate;
     setDelegate(delegate) {
@@ -31,7 +35,7 @@ export default class BallControl extends cc.Component {
 
         if (other.node.name == 'break') {
             cc.log("aaaa: " + other.node.name);
-            other.node.active = false;
+            other.node.parent.removeChild(other.node);
 
             if (this.dir == BallDirection.RIGHT_TOP) {
                 this.dir = BallDirection.RIGHT_BOTTOM;
