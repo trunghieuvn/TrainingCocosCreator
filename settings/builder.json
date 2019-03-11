@@ -22,19 +22,19 @@
   "oauthLoginServer": "",
   "optimizeHotUpdate": false,
   "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
+    "landscapeLeft": false,
+    "landscapeRight": false,
+    "portrait": true,
+    "upsideDown": true
   },
-  "packageName": "org.cocos2d.helloworld",
+  "packageName": "org.cocos2d.demogame",
   "privateKey": "",
   "qqplay": {
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait",
     "zip": false
   },
-  "startScene": "08f729a5-04c1-4176-94da-e6b820d367bc",
+  "startScene": "27992be7-2ff1-4e52-808b-d044b705e888",
   "title": "hello_world",
   "webOrientation": "auto",
   "wechatgame": {
