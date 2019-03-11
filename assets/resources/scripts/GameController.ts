@@ -22,7 +22,6 @@ export default class GameWorldController extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
         this.state = GameState.None;
-
     }
 
     start () {
