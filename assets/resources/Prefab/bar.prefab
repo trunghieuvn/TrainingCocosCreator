@@ -18,7 +18,7 @@
     "_parent": null,
     "_children": [],
     "_active": true,
-    "_level": 2,
+    "_level": 4,
     "_components": [
       {
         "__id__": 2
@@ -47,15 +47,15 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 163,
+      "y": -200,
       "z": 0
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
+      "x": 0.63,
+      "y": 0.27,
+      "z": 0.63
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -73,7 +73,7 @@
   },
   {
     "__type__": "cc.Sprite",
-    "_name": "",
+    "_name": "bar<Sprite>",
     "_objFlags": 0,
     "node": {
       "__id__": 1
@@ -107,7 +107,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "db9fc7c5-fe08-4c5b-9726-7f2b02b80a72"
     },
     "fileId": "cbWsb1YpVEu4BxxvTpaY5w",
     "sync": false

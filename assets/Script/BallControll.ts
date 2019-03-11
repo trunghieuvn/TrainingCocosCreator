@@ -11,9 +11,14 @@ export default class BallControll extends cc.Component {
     @property text: string = 'hello';
 
     @property speed: number = 100;
-    @property dir : BallDirection = BallDirection.RIGHT_TOP;
+    // @property dir : BallDirection = BallDirection.RIGHT_TOP;
 
     @property isMoving: Boolean = true;
+
+
+    @property({
+        type: cc.Enum(BallDirection),
+    }) dir = BallDirection.RIGHT_TOP;
 
 
 
@@ -21,7 +26,6 @@ export default class BallControll extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        cc.log("ccc");
         cc.director.getCollisionManager().enabled = true;
     }
 
@@ -33,6 +37,7 @@ export default class BallControll extends cc.Component {
         if(this.isMoving == false) {
             return;
         }
+        // cc.log(this.dir);
 
         if(this.node.x > cc.winSize.width - this.node.getContentSize().width / 2) {
             if(this.dir == BallDirection.RIGHT_TOP) {

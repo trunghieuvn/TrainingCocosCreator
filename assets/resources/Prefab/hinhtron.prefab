@@ -40,8 +40,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 40,
-      "height": 40
+      "width": 60,
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -113,8 +113,8 @@
     "label": null,
     "text": "hello",
     "speed": 100,
-    "dir": 1,
     "isMoving": true,
+    "dir": 1,
     "_id": ""
   },
   {
