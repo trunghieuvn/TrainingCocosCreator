@@ -74,6 +74,7 @@ export default class Player extends cc.Component {
     public moveToFall () {
         let direction = this.moveDirection.normalize();
         let distXY = direction.mul(this.moveDistance);
+        distXY.x = this.node.x > 0 ? -distXY.x : distXY.x;
         
         let actionMoveBy = cc.moveBy(1, distXY);
         let actionFall = cc.callFunc(() => {
