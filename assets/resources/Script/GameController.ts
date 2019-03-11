@@ -27,6 +27,7 @@ export default class GameController extends cc.Component implements BallDelegate
     gameSetting : cc.Prefab = null;
 
     dataSetting : GameSetting;
+    btnReset : cc.Node;
 
     @property(cc.Camera)
     camera : cc.Camera = null;
@@ -55,12 +56,17 @@ export default class GameController extends cc.Component implements BallDelegate
         cc.find("Canvas/GameWorld/Ball").getComponent(BallControl).setDelegate(this);
     }
 
+    resetGame(){
+        this.state = GameState.None;
+        this.init();
+        this.node.removeChild(this.level);
+    }
+
     start() {
         this.menu = this.UI.getChildByName("Menu");
+        this.btnReset = this.UI.getChildByName("btnReset");
         //this.level = this.UI.getChildByName("Level1");
-        this.bar.x = 0;
         this.init();
-
 
         this.dataSetting = cc.instantiate(this.gameSetting).getComponent(GameSetting);
     }
@@ -84,12 +90,9 @@ export default class GameController extends cc.Component implements BallDelegate
                 break;
         }
 
-        if(this.level != null && this.level.childrenCount <= 7){
+        if(this.level != null && this.level.childrenCount == 0){
             // load level
-            this.level = cc.instantiate(this.dataSetting.levels[1]);
-            this.level.x = 241;
-            this.level.y = 1183;
-            this.node.addChild(this.level);
+            this.loadLevel(1);
         }
 
     }
@@ -98,22 +101,20 @@ export default class GameController extends cc.Component implements BallDelegate
         this.menu.active = true;
         //this.level.active = false;
         this.state = GameState.MainMenuGame;
+        
     }
 
     //Event 
     clickBtnPlay() {
         this.state = GameState.InGame;
         this.menu.active = false;
-        //this.level.active = true;
+        this.btnReset.active = false;
         this.ball.active = true;
 
         this.ball.getComponent(BallControl).isMoving = true;
 
         // load level
-        this.level = cc.instantiate(this.dataSetting.levels[0]);
-        this.level.x = 241;
-        this.level.y = 1183;
-        this.node.addChild(this.level);
+        this.loadLevel(0);
     }
 
     onTouchMove(event) {
@@ -130,6 +131,14 @@ export default class GameController extends cc.Component implements BallDelegate
              x = cc.winSize.width - this.bar.getContentSize().width/2
         }
         this.bar.x = x
+    }
+
+    loadLevel(lel){
+        // load level
+        this.level = cc.instantiate(this.dataSetting.levels[lel]);
+        this.level.x = 241;
+        this.level.y = 1183;
+        this.node.addChild(this.level);
     }
 
 }

@@ -5,6 +5,9 @@ export default class GameSetting extends cc.Component {
 
     @property([cc.Prefab]) levels = [];
 
+    @property
+    speed : number = 500;
+
     // onLoad () {}
 
     start () {

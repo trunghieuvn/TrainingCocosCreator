@@ -24,10 +24,13 @@ export default class BallControl extends cc.Component {
     onLoad() {
         cc.director.getCollisionManager().enabled = true;
         this.isMoving = false;
+
+        
     }
 
     start() {
         this.dir = BallDirection.RIGHT_TOP;
+        this.speed = cc.instantiate(this.gameSetting).getComponent(GameSetting).speed;
     }
 
     onCollisionEnter(other, self) {
