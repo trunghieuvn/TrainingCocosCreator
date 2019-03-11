@@ -15,7 +15,7 @@ export default class NewClass extends cc.Component {
 
     @property([cc.Prefab]) lervels = [];
 
-    @property SPEED_PLAYER: number = 300;
+    @property PLAYER_SPEED: number = 300;
 
     // LIFE-CYCLE CALLBACKS:
 
