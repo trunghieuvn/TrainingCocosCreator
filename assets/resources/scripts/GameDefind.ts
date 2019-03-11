@@ -11,3 +11,15 @@ export enum BallDirection {
     LEFT_BOTTOM,
     RIGHT_BOTTOM
 }
+
+export enum BallState {
+    READY,
+    MOVING,
+    DIE
+}
+
+export interface BallDelegate {
+    onReady();
+    onMoving();
+    onDie();
+}

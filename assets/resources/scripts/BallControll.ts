@@ -34,6 +34,8 @@ export default class BallControll extends cc.Component {
         cc.director.getCollisionManager().enabled = false;
     }
 
+    
+
     moveByDirection(dt, direction: BallDirection) {
         var dirX = 1;
         var dirY = 1;
