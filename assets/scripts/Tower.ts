@@ -67,23 +67,16 @@ export default class Tower extends cc.Component {
         let targetTopPos = this.node.convertToNodeSpaceAR(this.target.convertToWorldSpaceAR(this.target.getChildByName('Top').position));
         this.vector = new cc.Vec2(targetTopPos.x - thisTopPos.x, targetTopPos.y - thisTopPos.y);
         
+        let angle = this.vector.angle(new cc.Vec2(0, 1)) * 180 / Math.PI;
 
         let minLength = this.vector.mag() - this.node.getChildByName('Rect').height - this.target.getChildByName('Rect').height;
         let maxLength = this.vector.mag() - this.node.getChildByName('Rect').height + this.target.getChildByName('Rect').height / 2;
         
-        let angle: number = 0;
-        if (this._bridge.height < minLength) {
-            angle = 180;
+        if (this._bridge.height < minLength || this._bridge.height > maxLength) {
             this.player.getComponent(Player).state = PlayerState.MoveToFall;
-            this.player.getComponent(Player).moveDistance = this._bridge.height;
-            this.player.getComponent(Player).moveDirection = this.vector;
-        } else if (this._bridge.height > maxLength) {
-            angle = this.vector.angle(new cc.Vec2(0, 1)) * 180 / Math.PI;
-            this.player.getComponent(Player).state = PlayerState.MoveToFall;
-            this.player.getComponent(Player).moveDistance = this._bridge.height;
+            this.player.getComponent(Player).moveDistance = this._bridge.height * 1.5;
             this.player.getComponent(Player).moveDirection = this.vector;
         } else {
-            angle = this.vector.angle(new cc.Vec2(0, 1)) * 180 / Math.PI;
             this.player.getComponent(Player).state = PlayerState.Move;
             this.player.getComponent(Player).newPos = this.gameWorld.convertToNodeSpaceAR(this.target.convertToWorldSpaceAR(targetTop.position));
         }
@@ -91,8 +84,16 @@ export default class Tower extends cc.Component {
 
         let actionRotateBy = cc.rotateBy(1, -angle);
         let actionSkewBy = cc.skewBy(1, 0, angle);
+        
         let spawn = cc.spawn(actionRotateBy, actionSkewBy);
+
         this._bridge.runAction(spawn);
         this.bridgeState = BridgeState.Finish;
+
+        if (this.player.getComponent(Player).state === PlayerState.MoveToFall) {
+            this.scheduleOnce(() => {
+                this._bridge.active = false;
+            }, 2);    
+        }
     }
 }
