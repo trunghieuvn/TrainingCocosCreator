@@ -11,19 +11,26 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class GameSetting extends cc.Component {
+export default class NewClass extends cc.Component {
 
-    @property([cc.Prefab]) levels = [];
+    @property(cc.Label)
+    label: cc.Label = null;
 
-    @property PLAYER_SPEED: number = 300;
+    @property
+    text: string = 'hello';
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {}
+    // onLoad () {}
 
     start () {
 
     }
 
-    // update (dt) {}
+    update (dt) {
+        // cc.log("update 1");
+    }
+    lateUpdate() {
+        // cc.log("update 2");
+    }
 }

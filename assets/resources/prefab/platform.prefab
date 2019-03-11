@@ -13,12 +13,12 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "break",
+    "_name": "platform",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
     "_active": true,
-    "_level": 2,
+    "_level": 1,
     "_components": [
       {
         "__id__": 2
@@ -142,9 +142,9 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "2cb45aa4-4ffb-4063-a0f9-43d574c1db0a"
     },
-    "fileId": "23ESzS3NFCdaKERN2bYqyH",
+    "fileId": "46t64pAX5ELqZPji59X43Y",
     "sync": false
   }
 ]
