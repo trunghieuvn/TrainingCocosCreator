@@ -1,24 +1,54 @@
 const { ccclass, property } = cc._decorator;
 
-import { GameState, BallDirection } from './GameConfig';
+import { GameState, BallDirection, BallDelegate } from './GameConfig';
+import BallControl from './BallControl';
 
 @ccclass
-export default class GameController extends cc.Component {
+export default class GameController extends cc.Component implements BallDelegate {
 
     @property(cc.Node)
     UI: cc.Node = null;
+
+    @property(cc.Canvas)
+    canvas: cc.Canvas = null;
 
     state: GameState;
     menu: cc.Node;
     level: cc.Node;
 
+    @property(cc.Node)
+    bar: cc.Node = null;
+
+    @property(cc.Node)
+    ball: cc.Node = null;
+
+
+    onReady(){
+
+    }
+
+    onDie(){
+        cc.log("Game over")
+        this.state = GameState.EndGame;
+        this.ball.getComponent(BallControl).isMoving = false;
+    }
+
+    onMoving(){
+
+    }
+
     onLoad() {
         this.state = GameState.None;
+        this.canvas.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove.bind(this))
+
+        //Add delegate
+        cc.find("Canvas/GameWorld/Ball").getComponent(BallControl).setDelegate(this);
     }
 
     start() {
         this.menu = this.UI.getChildByName("Menu");
         this.level = this.UI.getChildByName("Level1");
+        this.bar.x = 0;
         this.init();
     }
 
@@ -47,11 +77,28 @@ export default class GameController extends cc.Component {
 
     //Event 
     clickBtnPlay() {
-        cc.log("btnPLAY");
         this.state = GameState.InGame;
         this.menu.active = false;
         this.level.active = true;
+        this.ball.active = true;
 
+        this.ball.getComponent(BallControl).isMoving = true;
+    }
+
+    onTouchMove(event) {
+        //cc.log("touch x:" + event.touch._point.x);
+        if (this.state != GameState.InGame) {
+            return
+        }
+        var x = event.touch._point.x;
+        
+        //Ngan khong cho keo ra 2 bien
+        if (x < this.bar.getContentSize().width / 2) {
+             x = this.bar.getContentSize().width / 2;
+        } else if (x > cc.winSize.width - this.bar.getContentSize().width/2) {
+             x = cc.winSize.width - this.bar.getContentSize().width/2
+        }
+        this.bar.x = x
     }
 
 }

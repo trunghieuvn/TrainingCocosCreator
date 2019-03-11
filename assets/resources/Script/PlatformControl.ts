@@ -19,6 +19,6 @@ export default class Platform extends cc.Component {
     }
 
     onCollisionEnter(other, self) {
-        cc.log("Va cham");
+        cc.log("va gach ....");
     }
 }
