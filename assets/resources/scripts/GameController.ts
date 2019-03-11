@@ -68,7 +68,6 @@ export default class GameWorldController extends cc.Component {
      }
 
      onTouchMove(event) {
-         cc.log("ON TOUCH MOVE");
         if (this.state != GameState.InGame) {
             return
         }

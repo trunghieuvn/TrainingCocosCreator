@@ -31,16 +31,35 @@ export default class BallControll extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        cc.director.getCollisionManager().enabled = false;
+        cc.director.getCollisionManager().enabled = true;
     }
 
     onCollisionEnter(other, self) {
-        cc.log('onCollisionEnter');
-        if (this.node.name == 'break') {
-            cc.log('break');
+        cc.log("cham vao thanh o duoi");
+
+        if (other.node.name == 'break-1') {
+            cc.log("aaaa: " + other.node.name);
+            other.node.active = false;
+
+            if (this.dir == BallDirection.RIGHT_TOP) {
+                this.dir = BallDirection.RIGHT_BOTTOM;
+            } else if (this.dir == BallDirection.LEFT_TOP) {
+                this.dir = BallDirection.LEFT_BOTTOM;
+            } else if (this.dir == BallDirection.RIGHT_BOTTOM){
+                this.dir = BallDirection.RIGHT_TOP;
+            } else if (this.dir == BallDirection.LEFT_BOTTOM){
+                this.dir = BallDirection.LEFT_TOP;
+            }
+
         } else {
-            cc.log('bar');
+            //Khi cham vao thanh o duoi
+            if (this.dir == BallDirection.RIGHT_BOTTOM) {
+                this.dir = BallDirection.RIGHT_TOP;
+            } else if (this.dir == BallDirection.LEFT_BOTTOM) {
+                this.dir = BallDirection.LEFT_TOP;
+            }
         }
+
     }
 
     
