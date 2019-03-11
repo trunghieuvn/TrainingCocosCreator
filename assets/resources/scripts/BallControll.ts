@@ -34,6 +34,15 @@ export default class BallControll extends cc.Component {
         cc.director.getCollisionManager().enabled = false;
     }
 
+    onCollisionEnter(other, self) {
+        cc.log('onCollisionEnter');
+        if (this.node.name == 'break') {
+            cc.log('break');
+        } else {
+            cc.log('bar');
+        }
+    }
+
     
 
     moveByDirection(dt, direction: BallDirection) {
