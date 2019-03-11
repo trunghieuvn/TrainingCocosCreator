@@ -37,6 +37,10 @@ export default class BallControl extends cc.Component {
                 this.dir = BallDirection.RIGHT_BOTTOM;
             } else if (this.dir == BallDirection.LEFT_TOP) {
                 this.dir = BallDirection.LEFT_BOTTOM;
+            } else if (this.dir == BallDirection.RIGHT_BOTTOM){
+                this.dir = BallDirection.RIGHT_TOP;
+            } else if (this.dir == BallDirection.LEFT_BOTTOM){
+                this.dir = BallDirection.LEFT_TOP;
             }
 
         } else {
