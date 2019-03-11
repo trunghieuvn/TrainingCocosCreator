@@ -3,6 +3,7 @@ import BallControl from './BallControl';
 import PlayControl from './PlayControl';
 import GameSetting from './GameSetting';
 import Level from './Level';
+import PlayerState from './PlayerState';
 
 const {ccclass, property} = cc._decorator;
 
@@ -18,20 +19,24 @@ export default class GameController extends cc.Component {
   @property(cc.Node)
   gameSetting:cc.Node = null;
 
+  score : cc.Label = null;
+  level : cc.Label = null;
+
+  playerState: PlayerState = new PlayerState();
+
   guiNode : cc.Node = null;
 
   layer_MainMenu : cc.Node;
-  // layer_Playing : cc.Node;
+  layer_Playing : cc.Node;
 
   state : GameState = GameState.None;
   
   ballNode: cc.Node = null;
   playerNode: cc.Node = null;
 
-  currentLevel: number = 1;
   // LIFE-CYCLE CALLBACKS:
   onLoad () {
-      cc.log('onload')
+      // cc.log('onload')
   }
   
   winSizeW: number = 0;
@@ -42,31 +47,32 @@ export default class GameController extends cc.Component {
 
     this.guiNode = this.node.parent.getChildByName("GUIManager");
     this.layer_MainMenu = this.guiNode.getChildByName("MainMenu");
-    // this.layer_Playing = this.guiNode.getChildByName("PlayNode");
-
+    this.layer_Playing = this.guiNode.getChildByName("PlayingUI");
+    this.score = this.layer_Playing.getChildByName("labelScore").getComponent(cc.Label);
+    this.level = this.layer_Playing.getChildByName("labelLevel").getComponent(cc.Label);
     this.init ();
   }
 
   init() {
     this.layer_MainMenu.active = true;  
-    // this.layer_Playing.active = false;
+    this.layer_Playing.active = false;
     this.state = GameState.MainMenuGame;
     this.layer_MainMenu.getChildByName("btnPlay").on(cc.Node.EventType.TOUCH_START, this.startGame.bind(this));
   }
 
   startGame() {
     this.layer_MainMenu.active = false;  
-    // this.layer_Playing.active = true;
-    this.addLevel(this.currentLevel);
+    this.layer_Playing.active = true;
+    this.addLevel();
     this.addPlayer();
     this.addBall();
-  }  
+  }
 
-  addLevel(level) {
-    var levelPrefab = this.gameSetting.getComponent(GameSetting).listLevel[level];
+  addLevel() {
+    var levelPrefab = this.gameSetting.getComponent(GameSetting).listLevel[this.playerState.currentLevel - 1];
     var obj = cc.instantiate(levelPrefab);
     var level = obj.getComponent(Level);
-    level.setCollisionCallback(this.playerCollistionCallback.bind(this));
+    level.setCollisionCallback(this.playerCollistionCallback.bind(this, level));
     this.node.addChild(obj);
   }
 
@@ -93,8 +99,19 @@ export default class GameController extends cc.Component {
     this.playerNode = objP;
   }
 
-  playerCollistionCallback() {
+  playerCollistionCallback(level: Level) {
     var ball = this.ballNode.getComponent(BallControl);
     ball.changeDirectionByCollistion(false); // TODO check dir by horizontal
+    if (level) {
+      this.score.string = this.playerState.score(1).toString();
+      if (this.playerState.currentScore == level.totalBrick) {
+        this.nextLevel();
+      }
+    }
+  }
+
+  nextLevel() {
+    this.playerState.currentLevel += 1;
+    this.addLevel();
   }
 }

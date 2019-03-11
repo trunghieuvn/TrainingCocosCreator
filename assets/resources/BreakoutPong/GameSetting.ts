@@ -13,12 +13,6 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class GameSetting extends cc.Component {
-
-    @property(cc.Label)
-    label: cc.Label = null;
-
-    @property
-    text: string = 'hello';
     
     @property([cc.Prefab])
     listLevel = [];

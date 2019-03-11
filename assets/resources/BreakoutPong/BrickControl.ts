@@ -31,9 +31,10 @@ export default class BrickControl extends cc.Component {
     }
 
     onCollisionEnter(nodeOther, nodeSelf) {
+        // this.node.active = false;
+        this.node.destroy();
         if (this.collisionCallback != null) {
             this.collisionCallback();
         }
-        this.node.active = false;
     }
 }

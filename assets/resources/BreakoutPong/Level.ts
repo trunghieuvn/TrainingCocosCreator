@@ -35,16 +35,16 @@ export default class Level extends cc.Component {
             (cc.winSize.width - this.brickLevel1.data.width * this.numBrickPerRow - this.padding * 2) 
                 / (this.numBrickPerRow -1));
 
-        var x = this.padding + this.brickLevel1.data.width / 2;
+        var startX = this.padding + this.brickLevel1.data.width / 2;
+        var x = startX;
         var y = cc.winSize.height - this.padding - this.brickLevel1.data.height / 2;
         for (var i = 0; i < this.numRows; i++) {
             for (var j = 0; j < this.numBrickPerRow; j++) {
                 this.addBrick(x, y);
                 x += this.brickLevel1.data.width + spaceEachBrick;
             }
-            x = this.padding;
+            x = startX;
             y -= this.brickLevel1.data.height + this.padding;
-            
         }
     }
 
@@ -53,6 +53,7 @@ export default class Level extends cc.Component {
         this.collisionCallback = collisionCallback;
     }
 
+    totalBrick : number = 0;
     addBrick(x, y) {
         var objP =  cc.instantiate(this.brickLevel1);
         objP.x = x;
@@ -61,6 +62,7 @@ export default class Level extends cc.Component {
         var brick = objP.getComponent(BrickControl);
         brick.setCollisionCallback(this.collisionCallback);
         this.node.addChild(objP);
+        this.totalBrick += 1;
     }
     // update (dt) {}
 }
