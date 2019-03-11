@@ -85,12 +85,9 @@
       },
       {
         "__uuid__": "1e040557-d437-4ed0-8178-763cdc1f3903"
-      },
-      {
-        "__uuid__": "ccc9ec3a-3806-4d61-945b-0c92af15ecc1"
       }
     ],
-    "text": "hello",
+    "PLAYER_SPEED": 300,
     "_id": ""
   },
   {

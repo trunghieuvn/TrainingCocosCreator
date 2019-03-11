@@ -15,6 +15,7 @@ export default class PlatformControll extends cc.Component {
 
 
     hp : number = 1;
+    @property speedMove : number = 0;
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -25,5 +26,9 @@ export default class PlatformControll extends cc.Component {
 
     }
 
-    // update (dt) {}
+    update (dt) {
+        if(this.speedMove > 0 ) {
+
+        }
+    }
 }

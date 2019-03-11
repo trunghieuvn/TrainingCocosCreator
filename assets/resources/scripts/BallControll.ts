@@ -37,7 +37,7 @@ export default class BallControll extends cc.Component {
         this.player = cc.find("Canvas/GameWorld/Game/player");
     }
 
-    moveByDirection(dt, direction : BallDirection) {
+    moveByDirection(dt : number, direction : BallDirection) {
         var dirX = 1;
         var dirY = 1;
         switch(direction) {
@@ -101,5 +101,8 @@ export default class BallControll extends cc.Component {
 
         this.moveByDirection(dt, this.dir);
        
+    }
+
+    lateUpdate() {
     }
 }
