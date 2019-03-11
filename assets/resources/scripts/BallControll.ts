@@ -1,29 +1,35 @@
 
-import {BallDirection} from './GameDefine';
+import {BallDirection, BallState, BallDelegate} from './GameDefine';
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class BallControll extends cc.Component {
 
-    @property speed: number = 100;
-
+    
     /// 
+    @property speed: number = 100;
     @property({
         type: cc.Enum(BallDirection),
     }) dir = BallDirection.RIGHT_TOP;
 
+    player : cc.Node;
+
     /// 
-    isMoving : boolean = true;
+    state : BallState = BallState.MOVING;
 
-
+    // Define delegate 
+    delegate : BallDelegate;
+    setDelegate(deleg) {
+        this.delegate = deleg;
+    }
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
         cc.director.getCollisionManager().enabled  = false;
     }
 
     start () {
-
+        this.player = cc.find("Canvas/GameWorld/Game/player");
     }
 
     moveByDirection(dt, direction : BallDirection) {
@@ -57,7 +63,7 @@ export default class BallControll extends cc.Component {
     }
 
     update (dt) {
-        if(this.isMoving == false) 
+        if(this.state != BallState.MOVING) 
             return;
 
         if(this.node.x > cc.winSize.width 
@@ -80,6 +86,13 @@ export default class BallControll extends cc.Component {
             }
         }
 
+        if(this.node.y < this.node.getContentSize().height / 2) {
+            cc.log("is die");
+            this.state = BallState.DIE;
+            if(this.delegate != null)
+                this.delegate.OnDie();
+            
+        }
 
         this.moveByDirection(dt, this.dir);
        
