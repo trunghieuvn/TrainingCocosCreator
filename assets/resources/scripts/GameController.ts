@@ -89,7 +89,8 @@ export default class GameWorldController extends cc.Component implements BallDel
         this.layer_Game.active = true;
 
         // load level
-        var level1 = cc.instantiate(this.dataSetting.levels[0]);
+        var level1 = cc.instantiate(this.dataSetting.levels[1]);
                         this.node.addChild(level1);
+                        console.log(level1);
      }
 }

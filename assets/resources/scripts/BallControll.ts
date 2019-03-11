@@ -105,4 +105,6 @@ export default class BallControll extends cc.Component {
 
     lateUpdate() {
     }
+
+    
 }
