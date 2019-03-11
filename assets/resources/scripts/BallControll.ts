@@ -6,7 +6,6 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class BallControll extends cc.Component {
 
-    
     /// 
     @property speed: number = 100;
     @property({
@@ -84,19 +83,18 @@ export default class BallControll extends cc.Component {
             if(this.dir == BallDirection.LEFT_BOTTOM)
                 this.dir = BallDirection.RIGHT_BOTTOM;
         }
-
         if(this.node.y > cc.winSize.height - this.node.getContentSize().height / 2) {
             if(this.dir == BallDirection.RIGHT_TOP) {
                 this.dir = BallDirection.RIGHT_BOTTOM;
             }
+            if(this.dir == BallDirection.LEFT_TOP) {
+                this.dir = BallDirection.LEFT_BOTTOM;
+            }
         }
-
         if(this.node.y < this.node.getContentSize().height / 2) {
             cc.log("is die");
             this.state = BallState.DIE;
-
             this.notiDelegate_OnDie();
-            
         }
 
         this.moveByDirection(dt, this.dir);
@@ -106,5 +104,14 @@ export default class BallControll extends cc.Component {
     lateUpdate() {
     }
 
+    onCollisionEnter(other, self) {
+        if(this.dir == BallDirection.LEFT_BOTTOM) 
+            this.dir = BallDirection.RIGHT_TOP;
+
+        if(this.dir == BallDirection.RIGHT_BOTTOM)
+            this.dir = BallDirection.RIGHT_TOP;
+
+        console.log("Currently colliding");
+    }
     
 }

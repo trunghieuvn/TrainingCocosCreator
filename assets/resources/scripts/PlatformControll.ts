@@ -31,4 +31,13 @@ export default class PlatformControll extends cc.Component {
 
         }
     }
+
+
+    onCollisionEnter(other, self) {
+        console.log("Currently colliding");
+        this.node.destroy();
+    }
+    onCollisionExit(other,self){
+        console.log("Done colliding");
+    }
 }

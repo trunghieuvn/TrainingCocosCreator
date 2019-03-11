@@ -1,7 +1,7 @@
 @echo OFF
 cls
 set CUR_PATH=%~dp0
-
+set COCOS_TOOL=C:\CocosCreator\CocosCreator.exe
 set FBUILD=%~dp0\Tools\FastBuild
 
 set Prj_WIN32=%~dp0\\Prj\Win32 
@@ -19,7 +19,7 @@ echo.
 echo 	0. Clean GIT
 echo 	1. Remove folder auto genarate
 echo 	2. Update to HEAD
-echo 	3. Setup Cocos2dx
+echo 	3. Build Android
 
 echo 	99. Exit
 
@@ -29,7 +29,7 @@ set /p opt=		Enter choose:
 if "%opt%"=="0" goto Clean
 if "%opt%"=="1" goto RemoveFolder
 if "%opt%"=="2" goto UpdatetoHead
-if "%opt%"=="3" goto SetUpCocos2dx
+if "%opt%"=="3" goto BuildAndroid
 
 
 REM-------------------------Function--------------------------
@@ -56,11 +56,11 @@ REM-------------------------Function--------------------------
 	pause
 	exit /b
 	
-:fSetUpCocos2dx
-	echo Setup
-	call cocos new hello_tmp -l cpp
-	call move hello_tmp/cocos2d %CUR_PATH%
-	rd /s /q "hello_tmp"
+:fBuildAndroid
+	echo Build Andorid
+	call %COCOS_TOOL% --path %CUR_PATH% --build "platform=android;autoCompile=true"
+	start "" %CUR_PATH%"\build\jsb-link\publish"
+
 	pause
 	exit /b
 :fUpdateToHead 
@@ -98,9 +98,9 @@ goto :End
 REM----------------------------------------
 
 REM------------ 03. SetUp Cocos2dx---------------
-:SetUpCocos2dx
-	echo SetUp Cocos2dx
-	call :fSetUpCocos2dx
+:BuildAndroid
+	echo Build Andorid
+	call :fBuildAndroid
 	
 goto :End	
 REM----------------------------------------
@@ -111,4 +111,3 @@ pause
 
 cd %CUR_PATH%
 call 00_Make_Menu.bat
-

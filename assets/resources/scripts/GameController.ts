@@ -21,7 +21,10 @@ export default class GameWorldController extends cc.Component implements BallDel
     @property(cc.Node) GuiManager : cc.Node = null;
 
     @property(cc.Prefab) gameSetting : cc.Prefab = null;
+    @property(cc.Camera) camera : cc.Camera = null;
     
+    ballCtr : BallControll = null;
+
     state : GameState;
     layer_MainMenu : cc.Node;
     layer_Game : cc.Node;
@@ -35,14 +38,13 @@ export default class GameWorldController extends cc.Component implements BallDel
         cc.log("GameWorldController onLoad: " + this);
 
         this.canvas.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove.bind(this));
-        cc.find("Canvas/GameWorld/Game/ball")
-        .getComponent(BallControll)
-        .addDelegate(this);
+        this.ballCtr = cc.find("Canvas/GameWorld/Game/ball").getComponent(BallControll);
+        this.ballCtr.addDelegate(this);
         
     }
     onTouchMove(event) {
         cc.log("touch x:" + event.touch._point.x);
-        
+        this.ballCtr.player.x = event.touch._point.x;
     }
     
     start () {
@@ -56,6 +58,10 @@ export default class GameWorldController extends cc.Component implements BallDel
     }
     
     update (dt) {
+        if(this.camera.zoomRatio >= 1) {
+            this.camera.zoomRatio -= 2 * dt;
+        }
+
         switch(this.state) {
             case GameState.MainMenuGame: {
                 // code effect for main menu 
