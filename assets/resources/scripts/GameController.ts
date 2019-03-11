@@ -1,18 +1,23 @@
-
-enum GameState { 
-    None,
-    MainMenuGame,
-    InGame, 
-    EndGame
-}
-enum a{ 
-
-}
+import {GameState, BallDelegate} from "./GameDefind"
+import BallControll from "./BallControll";
+import GameSetting from "./GameSetting";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class GameWorldController extends cc.Component {
+export default class GameWorldController extends cc.Component implements BallDelegate {
+
+    onReady() {
+        throw new Error("Method not implemented");
+    }
+
+    onMoving() {
+        throw new Error("Method not implemented");
+    }
+
+    onDie() {
+        throw new Error("Method not implemented");
+    }
 
     @property (cc.Node) GuiManager : cc.Node = null;
 
@@ -20,9 +25,15 @@ export default class GameWorldController extends cc.Component {
 
     @property (cc.Canvas) canvas : cc.Canvas = null;
 
+    @property(cc.Prefab) GameSetting : cc.Prefab = null;
+
+
+
 
     state : GameState;
     layer_MainMenu : cc.Node;
+    layer_Game : cc.Node;
+    dataSetting : GameSetting;
 
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
@@ -34,7 +45,10 @@ export default class GameWorldController extends cc.Component {
 
     start () {
         this.layer_MainMenu = this.GuiManager.getChildByName("MainMenu");
+        this.layer_Game = cc.find("Canvas/GameWorld/Game");
         this.init ();
+        this.dataSetting = cc.instantiate(this.GameSetting)
+                        .getComponent(GameSetting);
     }
 
     update (dt) {
@@ -57,6 +71,7 @@ export default class GameWorldController extends cc.Component {
     init() {
         this.layer_MainMenu.active = true;  
         this.state = GameState.MainMenuGame;
+        this.layer_Game.active = false;
     }
 
      /// GUI 
@@ -64,7 +79,12 @@ export default class GameWorldController extends cc.Component {
         cc.log("btnPLAY");
         this.state = GameState.InGame;
         this.layer_MainMenu.active = false;
+        this.layer_Game.active = true;
 
+        // load level
+        var level1 = cc.instantiate(this.dataSetting.levels[1]);
+                        this.node.addChild(level1);
+                        console.log(level1);
      }
 
      onTouchMove(event) {

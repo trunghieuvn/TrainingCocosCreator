@@ -13,7 +13,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
-    @property([cc.Prefab]) lervels = [];
+    @property([cc.Prefab]) levels = [];
 
     @property PLAYER_SPEED: number = 300;
 
