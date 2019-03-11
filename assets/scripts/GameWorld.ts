@@ -34,6 +34,7 @@ export default class GameWorld extends cc.Component {
 
     start () {
         this.spawnTower();
+        this.spawnTower();
     }
 
     // update (dt) {}
@@ -44,6 +45,8 @@ export default class GameWorld extends cc.Component {
         tower.x = x;
         tower.y = y;
         tower.zIndex = -1;
+        tower.getComponent(Tower).player = this.player;
+        tower.getComponent(Tower).gameWorld = this.node;
         this.node.addChild(tower);
         return tower;
     }
@@ -73,27 +76,26 @@ export default class GameWorld extends cc.Component {
         }
         this.headTower = this.tailTower;
         this.tailTower = newTower;
-        this.tailTower.zIndex = this.headTower.zIndex - 1;
+        if (this.headTower) {
+            this.tailTower.zIndex = this.headTower.zIndex - 1;
+        }
     }
 
     public onTouchStart (touch: cc.Event.EventTouch) {
         let headTowerComponent = this.headTower.getComponent(Tower);
         if (headTowerComponent.bridgeState === BridgeState.None) {
             headTowerComponent.bridgeState = BridgeState.Bridging;
-            headTowerComponent.vector = new cc.Vec2(this.tailTower.x - this.headTower.x, this.tailTower.y - this.headTower.y);
+            headTowerComponent.target = this.tailTower;
         }
     }
 
     public onTouchEnd (touch: cc.Event.EventTouch) {
         if (this.headTower.getComponent(Tower).bridgeState === BridgeState.Bridging) {
             this.headTower.getComponent(Tower).bridgeState = BridgeState.Bridge;
-
-            let worldPos = this.tailTower.convertToWorldSpaceAR(this.tailTower.getChildByName('Top').position);
-            let nodePos = this.node.convertToNodeSpaceAR(worldPos);
-    
-            this.scheduleOnce(() => {
-                this.player.getComponent(Player).move(nodePos.x, nodePos.y);
-            }, 1);
         }
+    }
+
+    public gameOver () {
+        cc.director.loadScene('GameOver');
     }
 }
