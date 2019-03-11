@@ -1,10 +1,20 @@
 
-import {GameState} from './GameDefine';
+import {GameState, BallDelegate} from './GameDefine';
+import BallControll from './BallControll';
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class GameWorldController extends cc.Component {
+export default class GameWorldController extends cc.Component implements BallDelegate {
+    onReady() {
+        throw new Error("Method not implemented.");
+    }
+    onMoving() {
+        throw new Error("Method not implemented.");
+    }
+    OnDie() {
+        cc.log("GameWorldController::OnDie: DIE");
+    }
 
     @property(cc.Canvas) canvas : cc.Canvas = null;
     @property (cc.Node) GuiManager : cc.Node = null;
@@ -21,7 +31,9 @@ export default class GameWorldController extends cc.Component {
         cc.log("Winsize height: " + cc.winSize.height);
 
         this.canvas.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove.bind(this));
-        
+        cc.find("Canvas/GameWorld/Game/ball")
+        .getComponent(BallControll)
+        .addDelegate(this);
         
     }
     onTouchMove(event) {
