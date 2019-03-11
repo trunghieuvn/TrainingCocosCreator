@@ -19,6 +19,7 @@ export default class GameWorld extends cc.Component {
     @property(cc.Prefab) prefTower: cc.Prefab = null;
     @property(cc.Node) camera: cc.Node = null;
     @property(cc.Node) player: cc.Node = null;
+    @property(cc.Node) background: cc.Node = null;
 
     // =========================== Members ================================
     private headTower: cc.Node = null;
@@ -30,6 +31,7 @@ export default class GameWorld extends cc.Component {
         // init event touch listener
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart.bind(this));
         this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd.bind(this));
+        this.background.zIndex = -100;
     }
 
     start () {
