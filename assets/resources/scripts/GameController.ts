@@ -20,5 +20,6 @@ export default class GameController extends cc.Component {
     btnPlay(){
         cc.log("play");
         cc.audioEngine.play(this.audio_button_play, false, 1);
+        cc.director.loadScene("ready");
     }
 }
