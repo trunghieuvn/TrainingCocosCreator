@@ -46,7 +46,7 @@ export default class NewClass extends cc.Component {
         } else if (this.myBody.linearVelocity.y === 0) {
             this.node.angle = 0;
         } else {
-            let angle = this.lerp(0, -90, -this.myBody.linearVelocity.y / 450);
+            let angle = this.lerp(0, -60, -this.myBody.linearVelocity.y / 450);
             this.node.angle = angle;
         }
     }
