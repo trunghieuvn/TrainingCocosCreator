@@ -77,7 +77,7 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 7
+        "__id__": 6
       }
     ],
     "_prefab": null,
@@ -231,34 +231,30 @@
     "_children": [],
     "_active": true,
     "_level": 2,
-    "_components": [
-      {
-        "__id__": 6
-      }
-    ],
+    "_components": [],
     "_prefab": null,
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 15,
+      "g": 23,
+      "b": 224,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1242,
-      "height": 13248
+      "width": 0,
+      "height": 0
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
-      "y": 0
+      "y": 0.5
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 4,
-      "y": -696,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -278,36 +274,8 @@
     "_skewY": 0,
     "_zIndex": 0,
     "_is3DNode": false,
-    "groupIndex": 1,
-    "_id": "fclLuE3eBP5raI/koKg2V6"
-  },
-  {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 5
-    },
-    "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "fc552cb6-ded5-42d8-9878-afcfec37f417"
-    },
-    "_type": 0,
-    "_sizeMode": 1,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_state": 0,
-    "_atlas": null,
-    "_id": "c0dztsC3JHGabLXCfG2EeS"
+    "groupIndex": 0,
+    "_id": "9azyn8rqNP6LBQ6xaMs2iY"
   },
   {
     "__type__": "cc.Canvas",
