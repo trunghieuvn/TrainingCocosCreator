@@ -19,7 +19,7 @@ export default class Player extends cc.Component {
     public touchStartLoc: cc.Vec2 = null;
     public touchEndLoc: cc.Vec2 = null;
 
-    public speed: number = 0;
+    public speed: number = 100;
     public direction: cc.Vec2 = cc.Vec2.ZERO;
     public frictionForce: number = 200;
 
@@ -36,6 +36,7 @@ export default class Player extends cc.Component {
     }
 
     update (dt) {
+        this.node.position = cc.v2({x: 0, y: this.node.y +300 * dt});
         this.move();
         this.handleBounceEdge();
     }
