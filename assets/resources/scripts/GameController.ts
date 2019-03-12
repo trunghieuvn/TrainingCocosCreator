@@ -5,6 +5,8 @@ export default class GameController extends cc.Component {
 
     // LIFE-CYCLE CALLBACKS:
 
+    @property(cc.AudioClip) audio_button_play = null;
+
     onLoad () {}
 
     start () {
@@ -16,6 +18,7 @@ export default class GameController extends cc.Component {
 
     //Event
     btnPlay(){
-        
+        cc.log("play");
+        cc.audioEngine.play(this.audio_button_play, false, 1);
     }
 }
