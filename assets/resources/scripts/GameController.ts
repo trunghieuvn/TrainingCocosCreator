@@ -14,7 +14,9 @@ export default class GameController extends cc.Component {
         cc.find("Canvas/game_name").runAction(cc.moveTo(2, cc.p(0, 100)));
     }
 
-    update(dt) { }
+    update(dt) {
+        
+    }
 
 
     //Event
