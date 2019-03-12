@@ -41,9 +41,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.18607469171659016,
-      "y": 0.18607469171659016,
-      "z": 0.18607469171659016
+      "x": 0.37421875,
+      "y": 0.37421875,
+      "z": 0.37421875
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -1026,14 +1026,8 @@
       "__id__": 20
     },
     "_enabled": true,
-    "_defaultClip": {
-      "__uuid__": "c0d058b7-c0d5-4fca-8658-b6b02b59325a"
-    },
-    "_clips": [
-      {
-        "__uuid__": "c0d058b7-c0d5-4fca-8658-b6b02b59325a"
-      }
-    ],
+    "_defaultClip": null,
+    "_clips": [],
     "playOnLoad": true,
     "_id": "62BBLmnStPJqqh+XQ/uKta"
   },

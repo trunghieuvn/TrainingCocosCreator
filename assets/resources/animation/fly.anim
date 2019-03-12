@@ -3,7 +3,7 @@
   "_name": "fly",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.26666666666666666,
+  "_duration": 0.3333333333333333,
   "sample": 60,
   "speed": 1,
   "wrapMode": "2",
@@ -30,6 +30,12 @@
             }
           },
           {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "4fe4d073-f934-48e8-af03-dee8d5b03755"
+            }
+          },
+          {
             "frame": 0.25,
             "value": {
               "__uuid__": "4fe4d073-f934-48e8-af03-dee8d5b03755"
@@ -37,6 +43,18 @@
           }
         ]
       }
+    },
+    "props": {
+      "y": [
+        {
+          "frame": 0.25,
+          "value": 86
+        },
+        {
+          "frame": 0.3333333333333333,
+          "value": 75
+        }
+      ]
     }
   },
   "events": []
