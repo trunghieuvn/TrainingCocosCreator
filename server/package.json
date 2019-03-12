@@ -1,0 +1,10 @@
+{
+  "name": "demo-websocket",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "trunghieutran",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^6.2.0"
+  }
+}
