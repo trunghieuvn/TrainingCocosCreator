@@ -10,14 +10,11 @@
 
 const {ccclass, property} = cc._decorator;
 
-// import BallControll from './ballcontroll';
-
 @ccclass
-export default class BallControler extends cc.Component {
+export default class PipeControl extends cc.Component {
 
-    // @property(cc.Label)
-    // label: cc.Label = null;
-    @property(cc.Prefab) ball : cc.Prefab = null;
+    @property(cc.Prefab)
+    pipeGroup: cc.Prefab = null;
 
     @property
     text: string = 'hello';
@@ -25,21 +22,21 @@ export default class BallControler extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        for(var i = 0; i < 3; i++) {
-            var obj_ball = cc.instantiate(this.ball);
-            obj_ball.x = 100 * i;
-            this.node.addChild(obj_ball);
-        }
+        // this.node.position = new cc.Vec2(0,200);
+        // var child = this.node.addChild(this.node, 1, 'pipe');
+        // var pipe = cc.instantiate(pipeGroup);
+        // this.node.addChild(pipe);
+    }
+
+    public setPosition (dt) : PipeControl {
+        dt.y = 300 * dt + 100;
+        dt.x = 500 * dt + 100;
+        return this;
     }
 
     start () {
 
     }
 
-    
-    update (dt) {
-        
-        
-    }
-
+    // update (dt) {}
 }

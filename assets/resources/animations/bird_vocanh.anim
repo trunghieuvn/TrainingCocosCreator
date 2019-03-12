@@ -1,0 +1,37 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "bird_vocanh",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.5166666666666667,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": "22",
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "5a01f58a-6266-43b3-b214-e9c5ed7c88f2"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "952b30ac-d62e-4efd-bf62-68ba1ea96867"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "4f93c190-1696-4d08-9f2e-7f0e5e3ecbf0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
