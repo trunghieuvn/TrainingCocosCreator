@@ -1,0 +1,73 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "fly",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.0166666666666666,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": "2",
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "f090bb3f-c142-4e61-ab6a-d095478bb56c"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "f2ae60c9-c543-430b-a29d-1c6b62cef272"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "f2d60933-3651-47f0-aee5-ed6fb23ae984"
+            }
+          },
+          {
+            "frame": 0.75,
+            "value": {
+              "__uuid__": "f2ae60c9-c543-430b-a29d-1c6b62cef272"
+            }
+          },
+          {
+            "frame": 1,
+            "value": {
+              "__uuid__": "f090bb3f-c142-4e61-ab6a-d095478bb56c"
+            }
+          }
+        ]
+      }
+    },
+    "props": {
+      "y": [
+        {
+          "frame": 0,
+          "value": 180
+        },
+        {
+          "frame": 0.25,
+          "value": 220
+        },
+        {
+          "frame": 0.5,
+          "value": 180
+        },
+        {
+          "frame": 0.75,
+          "value": 140
+        },
+        {
+          "frame": 1,
+          "value": 180
+        }
+      ]
+    }
+  },
+  "events": []
+}
