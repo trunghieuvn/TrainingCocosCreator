@@ -1,4 +1,4 @@
 {
-  "engine": "cocos2d-html5",
+  "engine": "cocos-creator-js",
   "packages": "packages"
 }
