@@ -5,6 +5,7 @@
   "author": "trunghieutran",
   "license": "MIT",
   "dependencies": {
+    "uuid": "^3.3.2",
     "ws": "^6.2.0"
   }
 }

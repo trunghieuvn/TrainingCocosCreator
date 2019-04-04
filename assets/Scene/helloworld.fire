@@ -17,7 +17,7 @@
         "__id__": 2
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 0,
     "_components": [],
     "_prefab": null,
@@ -41,9 +41,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.6458333333333333,
-      "y": 0.6458333333333333,
-      "z": 0.6458333333333333
+      "x": 0.40041458822339665,
+      "y": 0.40041458822339665,
+      "z": 0.40041458822339665
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -80,13 +80,16 @@
       },
       {
         "__id__": 12
+      },
+      {
+        "__id__": 16
       }
     ],
     "_active": true,
-    "_level": 0,
+    "_level": 1,
     "_components": [
       {
-        "__id__": 14
+        "__id__": 18
       }
     ],
     "_prefab": null,
@@ -386,8 +389,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 9,
-      "y": 188,
+      "x": 11,
+      "y": 76,
       "z": 0
     },
     "_scale": {
@@ -476,8 +479,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": -30,
+      "x": 2,
+      "y": -117,
       "z": 0
     },
     "_scale": {
@@ -529,6 +532,112 @@
   },
   {
     "__type__": "cc.Node",
+    "_name": "Player",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [
+      {
+        "__id__": 13
+      }
+    ],
+    "_active": true,
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 15
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 60,
+      "y": -285,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_quat": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_zIndex": 0,
+    "_is3DNode": false,
+    "groupIndex": 0,
+    "_id": "867Dclnj9EDoKGdGpPCGPi"
+  },
+  {
+    "__type__": "cc.Node",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 12
+    },
+    "_id": "63pHBT/PRF+LD8G7MIZBnd",
+    "_prefab": {
+      "__id__": 14
+    },
+    "_name": "Player",
+    "_active": true,
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_rotationX": 0,
+    "_rotationY": 0
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 13
+    },
+    "asset": {
+      "__uuid__": "cb385ff2-181d-417d-9fb3-a507c53233a1"
+    },
+    "fileId": "d0lqqV+UlBK5V+pBZj8L05",
+    "sync": true
+  },
+  {
+    "__type__": "3667ep29HVBhqYIt77Wg5n9",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 12
+    },
+    "_enabled": true,
+    "_id": "6cDMXUnd1H64LmcbIj5MbF"
+  },
+  {
+    "__type__": "cc.Node",
     "_name": "GameWorld",
     "_objFlags": 0,
     "_parent": {
@@ -539,7 +648,7 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 13
+        "__id__": 17
       }
     ],
     "_prefab": null,
@@ -592,11 +701,12 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 12
+      "__id__": 16
     },
     "_enabled": true,
-    "label": null,
-    "text": "hello",
+    "prefab_Player": {
+      "__uuid__": "cb385ff2-181d-417d-9fb3-a507c53233a1"
+    },
     "_id": "4aHjuLdFdHGIN/n+pAgcWZ"
   },
   {
