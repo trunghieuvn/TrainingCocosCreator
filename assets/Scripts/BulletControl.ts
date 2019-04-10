@@ -11,32 +11,34 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class BulletControl extends cc.Component {
 
-    @property(cc.Canvas) canvas : cc.Canvas = null;
+    @property() speed: number = 10;
 
     // LIFE-CYCLE CALLBACKS:
+
     onLoad () {
-        console.log("GameManager onLoad");
-        this.canvas.node.on(cc.Node.EventType.TOUCH_START, 
-            this.onTouchStart.bind(this));
-        this.canvas.node.on(cc.Node.EventType.TOUCH_END, 
-            this.onTouchEnd.bind(this));
+        console.log("BulletControl onLoad");
+
+        cc.director.getCollisionManager().enabled = true;
     }
 
-    // TouchEvent
-    onTouchStart(event) {
-        console.log("GameManager onTouchStart " + event);
-    }
-
-    // TouchEnd
-    onTouchEnd(event) {
-        console.log("GameManager onTouchEnd");
+    onCollisionEnter(other, self) {
+        console.log("onCollisionEnter", other, self);
+        self.node.destroy();
     }
 
     start () {
 
     }
 
-    update (dt) {}
+    update (dt) {
+        // this.node.y += this.speed * dt;
+
+        if(this.node.y > cc.director.getWinSize().height){
+            this.node.destroy();
+
+            console.log("BulletControl is distroyed!");
+        }
+    }
 }
