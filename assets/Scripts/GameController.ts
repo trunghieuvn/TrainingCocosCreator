@@ -23,10 +23,13 @@ export default class GameController extends cc.Component {
 
     @property(cc.Canvas) canvas : cc.Canvas = null;
 
-    state: STATE = STATE.IDLE;
-    player: cc.Node = null;
     @property() speed: number = 0.1;
 
+    state: STATE = STATE.IDLE;
+    player: cc.Node = null;
+    ws: WebSocket = null;
+
+    isConnected : boolean = false;
     // LIFE-CYCLE CALLBACKS:
     onLoad () {
         console.log("GameController start");
@@ -50,7 +53,24 @@ export default class GameController extends cc.Component {
     }
 
     start () {
-        
+        this.ws = new WebSocket("ws://192.168.1.7:8080");
+
+        let seft = this;
+
+        this.ws.onopen = function (event) {
+            console.log("Send Text WS was opened.");
+
+            seft.isConnected = true;
+        };
+        this.ws.onmessage = function (event) {
+            console.log("response text msg: " + event.data);
+        };
+        this.ws.onerror = function (event) {
+            console.log("Send Text fired an error");
+        };
+        this.ws.onclose = function (event) {
+            console.log("WebSocket instance closed.");
+        };
     }
 
     update (dt) {
@@ -71,6 +91,11 @@ export default class GameController extends cc.Component {
                     this.player.x = 0;
                 }
                 break;
+        }
+        if(this.isConnected) {
+            this.ws.send(JSON.stringify({
+                'x' : this.player.x
+            }));
         }
     }
 
